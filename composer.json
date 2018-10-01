@@ -1,0 +1,19 @@
+{
+	"name": "phpgt/sqlbuilder",
+	"description": "Object oriented representation of SQL queries.",
+
+	"require": {
+		"php": "^7.1"
+	},
+
+	"require-dev": {
+	},
+
+	"autoload": {
+		"Gt\\SqlBuilder\\": "./src"
+	},
+
+	"autoload-dev": {
+		"Gt\\SqlBuilder\\Test\\": "./test/unit"
+	}
+}
