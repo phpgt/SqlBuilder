@@ -10,10 +10,14 @@
 	},
 
 	"autoload": {
-		"Gt\\SqlBuilder\\": "./src"
+		"psr-4": {
+			"Gt\\SqlBuilder\\": "./src"
+		}
 	},
 
 	"autoload-dev": {
-		"Gt\\SqlBuilder\\Test\\": "./test/unit"
+		"psr-4": {
+			"Gt\\SqlBuilder\\Test\\": "./test/unit"
+		}
 	}
 }
