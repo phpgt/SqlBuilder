@@ -128,7 +128,7 @@ The solution provided by this library is to break down an SQL query into its dif
 SQL compatibility
 -----------------
 
-This library does not provide any SQL processing capabilities by design. Any driver-specific SQL used will not be compatible with other drivers.
+This library does not provide any SQL processing capabilities by design. Any driver-specific SQL used will not be compatible with other drivers. This allows the developer to fully utilise their SQL driver of choice, rather than generating _generic_ SQL.
 
 [dry]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
 [view]: https://en.wikipedia.org/wiki/View_(SQL)
