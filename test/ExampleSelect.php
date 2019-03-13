@@ -1,7 +1,7 @@
 <?php
 namespace Gt\SqlBuilder;
 
-class ExampleSelect extends SelectBuilder {
+class ExampleSelect extends SelectQuery {
 	public function select():array {
 		return [
 			"id",

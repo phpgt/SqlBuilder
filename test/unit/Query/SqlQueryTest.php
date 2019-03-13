@@ -1,14 +1,14 @@
 <?php
-namespace Gt\SqlBuilder\Test;
+namespace Gt\SqlBuilder\Test\Query;
 
-use Gt\SqlBuilder\SqlBuilder;
+use Gt\SqlBuilder\Query\SqlQuery;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class SqlBuilderTest extends TestCase {
+class SqlQueryTest extends TestCase {
 	public function testDefaults() {
-		/** @var MockObject|SqlBuilder $sut */
-		$sut = self::getMockForAbstractClass(SqlBuilder::class);
+		/** @var MockObject|SqlQuery $sut */
+		$sut = self::getMockForAbstractClass(SqlQuery::class);
 		self::assertEquals("", $sut->preQuery());
 		self::assertEquals("", $sut->postQuery());
 	}
