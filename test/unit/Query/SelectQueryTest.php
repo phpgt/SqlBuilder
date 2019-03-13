@@ -1,4 +1,7 @@
 <?php
+/** @noinspection SqlNoDataSourceInspection */
+/** @noinspection SqlResolveInspection TODO: This is not working :( */
+
 namespace Gt\SqlBuilder\Test\Query;
 
 use Gt\SqlBuilder\Query\SelectQuery;
