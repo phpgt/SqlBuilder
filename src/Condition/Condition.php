@@ -15,7 +15,7 @@ abstract class Condition {
 	}
 
 	public function getCondition(
-		string $sublogic = null,
+		string $subLogic = null,
 		string $separator = "\n\t"
 	):string {
 		$condition = "";
@@ -38,8 +38,8 @@ abstract class Condition {
 				continue;
 			}
 
-			if($sublogic && strlen($condition) > 0) {
-				$condition .= $sublogic;
+			if($subLogic && strlen($condition) > 0) {
+				$condition .= $subLogic;
 				$condition .= " ";
 			}
 			$condition .= $part;
