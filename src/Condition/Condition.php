@@ -38,7 +38,7 @@ abstract class Condition {
 				continue;
 			}
 
-			if(strlen($condition) > 0) {
+			if($i > 0) {
 				if($subLogic) {
 					$condition .= $subLogic;
 				}

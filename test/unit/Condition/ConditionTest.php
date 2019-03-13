@@ -26,34 +26,34 @@ class ConditionTest extends TestCase {
 		$sut = self::getMockForAbstractClass(
 			Condition::class,
 			[
-				"key = value",
+				"key = 'value'",
 			]
 		);
 
 		self::assertEquals(
-			"key = value",
+			"key = 'value'",
 			$sut->getCondition()
 		);
 	}
 
 	public function testGetConditionMultipleStringAnd() {
 		$sut = new AndCondition(
-				"key1 = value1",
-				"key2 = value2"
+				"key1 = 'value1'",
+				"key2 = 'value2'"
 		);
 		self::assertEquals(
-			"key1 = value1\n\tand key2 = value2",
+			"key1 = 'value1'\n\tand key2 = 'value2'",
 			$sut->getCondition()
 		);
 	}
 
 	public function testGetConditionMultipleStringOr() {
 		$sut = new OrCondition(
-			"key1 = value1",
-			"key2 = value2"
+			"key1 = 'value1'",
+			"key2 = 'value2'"
 		);
 		self::assertEquals(
-			"key1 = value1\n\tor key2 = value2",
+			"key1 = 'value1'\n\tor key2 = 'value2'",
 			$sut->getCondition()
 		);
 	}
@@ -63,7 +63,7 @@ class ConditionTest extends TestCase {
 		$condition->method("getLogic")
 			->willReturn("testlogic");
 		$condition->method("getCondition")
-			->willReturn("testKey = testValue");
+			->willReturn("testKey = 'testValue'");
 
 		/** @var MockObject|Condition $sut */
 		$sut = self::getMockForAbstractClass(
@@ -71,32 +71,44 @@ class ConditionTest extends TestCase {
 			$condition,
 		]);
 		self::assertEquals(
-			"( testKey = testValue )",
+			"( testKey = 'testValue' )",
 			$sut->getCondition()
 		);
 	}
 
 	public function testGetConditionMultipleCondition() {
-		$condition1 = self::createMock(Condition::class);
-		$condition1->method("getLogic")
-			->willReturn("testlogic");
-		$condition1->method("getCondition")
-			->willReturn("testKey1 = testValue1");
-		$condition2 = self::createMock(Condition::class);
-		$condition2->method("getLogic")
-			->willReturn("testlogic");
-		$condition2->method("getCondition")
-			->willReturn("testKey2 = testValue2");
+		$and = new OrCondition("testKey1 = 'testValue1'");
+		$or = new OrCondition("testKey2 = 'testValue2'");
 
 		/** @var MockObject|Condition $sut */
 		$sut = self::getMockForAbstractClass(
 			Condition::class, [
-			$condition1,
-			$condition2,
+			$and,
+			$or,
 		]);
 
 		self::assertEquals(
-			"( testKey1 = testValue1\n\ttestlogic testKey2 = testValue2 )",
+			"( testKey1 = 'testValue1'\n\tor testKey2 = 'testValue2' )",
+			$sut->getCondition()
+		);
+	}
+
+	public function testGetConditionMultipleNestedCondition() {
+		$and = new OrCondition("testKey1 = 'testValue1'");
+		$or = new OrCondition(
+			"testKey2 = 'testValue2'",
+			"testKey3 = 'testValue3'"
+		);
+
+		/** @var MockObject|Condition $sut */
+		$sut = self::getMockForAbstractClass(
+			Condition::class, [
+			$and,
+			$or,
+		]);
+
+		self::assertEquals(
+			"( testKey1 = 'testValue1'\n\tor testKey2 = 'testValue2'\n\tor testKey3 = 'testValue3' )",
 			$sut->getCondition()
 		);
 	}
