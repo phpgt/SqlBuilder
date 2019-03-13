@@ -20,4 +20,19 @@ class ConditionTest extends TestCase {
 		$sut = self::getMockForAbstractClass(Condition::class);
 		self::assertEquals("", $sut->getCondition());
 	}
+
+	public function testGetConditionSingleString() {
+		/** @var MockObject|Condition $sut */
+		$sut = self::getMockForAbstractClass(
+			Condition::class,
+			[
+				"key = value",
+			]
+		);
+
+		self::assertEquals(
+			"key = value",
+			$sut->getCondition()
+		);
+	}
 }
