@@ -57,4 +57,22 @@ class ConditionTest extends TestCase {
 			$sut->getCondition()
 		);
 	}
+
+	public function testGetConditionSingleConditionAnd() {
+		$condition = self::createMock(Condition::class);
+		$condition->method("getLogic")
+			->willReturn("testlogic");
+		$condition->method("getCondition")
+			->willReturn("testKey = testValue");
+
+		/** @var MockObject|Condition $sut */
+		$sut = self::getMockForAbstractClass(
+			Condition::class, [
+			$condition,
+		]);
+		self::assertEquals(
+			"( testKey = testValue )",
+			$sut->getCondition()
+		);
+	}
 }
