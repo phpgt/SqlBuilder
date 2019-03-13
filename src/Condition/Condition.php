@@ -38,8 +38,14 @@ abstract class Condition {
 				continue;
 			}
 
-			if($subLogic && strlen($condition) > 0) {
-				$condition .= $subLogic;
+			if(strlen($condition) > 0) {
+				if($subLogic) {
+					$condition .= $subLogic;
+				}
+				else {
+					$condition .= $this->getLogic();
+				}
+
 				$condition .= " ";
 			}
 			$condition .= $part;

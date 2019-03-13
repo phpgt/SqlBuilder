@@ -35,4 +35,26 @@ class ConditionTest extends TestCase {
 			$sut->getCondition()
 		);
 	}
+
+	public function testGetConditionMultipleStringAnd() {
+		$sut = new AndCondition(
+				"key1 = value1",
+				"key2 = value2"
+		);
+		self::assertEquals(
+			"key1 = value1\n\tand key2 = value2",
+			$sut->getCondition()
+		);
+	}
+
+	public function testGetConditionMultipleStringOr() {
+		$sut = new OrCondition(
+			"key1 = value1",
+			"key2 = value2"
+		);
+		self::assertEquals(
+			"key1 = value1\n\tor key2 = value2",
+			$sut->getCondition()
+		);
+	}
 }
