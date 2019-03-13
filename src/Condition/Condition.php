@@ -1,7 +1,7 @@
 <?php
 namespace Gt\SqlBuilder\Condition;
 
-class Condition {
+abstract class Condition {
 	protected $logic;
 	protected $parts;
 
