@@ -18,4 +18,9 @@ class SelectQueryTest extends TestCase {
 		self::assertEmpty($sut->orderBy());
 		self::assertEmpty($sut->limit());
 	}
+
+	public function testToStringEmpty() {
+		$sut = self::getMockForAbstractClass(SelectQuery::class);
+		self::assertEmpty((string)$sut);
+	}
 }
