@@ -58,7 +58,7 @@ class ConditionTest extends TestCase {
 		);
 	}
 
-	public function testGetConditionSingleConditionAnd() {
+	public function testGetConditionSingleCondition() {
 		$condition = self::createMock(Condition::class);
 		$condition->method("getLogic")
 			->willReturn("testlogic");
@@ -72,6 +72,31 @@ class ConditionTest extends TestCase {
 		]);
 		self::assertEquals(
 			"( testKey = testValue )",
+			$sut->getCondition()
+		);
+	}
+
+	public function testGetConditionMultipleCondition() {
+		$condition1 = self::createMock(Condition::class);
+		$condition1->method("getLogic")
+			->willReturn("testlogic");
+		$condition1->method("getCondition")
+			->willReturn("testKey1 = testValue1");
+		$condition2 = self::createMock(Condition::class);
+		$condition2->method("getLogic")
+			->willReturn("testlogic");
+		$condition2->method("getCondition")
+			->willReturn("testKey2 = testValue2");
+
+		/** @var MockObject|Condition $sut */
+		$sut = self::getMockForAbstractClass(
+			Condition::class, [
+			$condition1,
+			$condition2,
+		]);
+
+		self::assertEquals(
+			"( testKey1 = testValue1\n\ttestlogic testKey2 = testValue2 )",
 			$sut->getCondition()
 		);
 	}
