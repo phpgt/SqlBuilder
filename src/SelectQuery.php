@@ -2,11 +2,8 @@
 namespace Gt\SqlBuilder;
 
 abstract class SelectQuery extends SqlQuery {
-	const PRE_QUERY_COMMENT = "/* preQuery */";
-	const POST_QUERY_COMMENT = "/* postQuery */";
-
 	public function __toString():string {
-		$queryBreakdown = [
+		return $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"select" => $this->select(),
 			"from" => $this->from(),
@@ -17,7 +14,7 @@ abstract class SelectQuery extends SqlQuery {
 			"order by" => $this->orderBy(),
 			"limit" => $this->limit(),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
-		];
+		]);
 /*
 		$query = "";
 		$preQuery = $this->preQuery();
