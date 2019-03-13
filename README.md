@@ -23,8 +23,8 @@ When a PHP application reaches scale, it is often the database that is the perfo
 	<img src="https://badge.status.php.gt/sqlbuilder-docs.svg" alt="PHP.Gt/SqlBuilder documentation" />
 </a>
 
-Example usage: selecting from the `student` table
---------------------------------------------------
+Example usage: a class that represents a SELECT query
+-----------------------------------------------------
 
 Imagine a typical database application with a `student` table used to store details of each student. A basic select might look something like this:
 
@@ -53,8 +53,10 @@ class StudentSelect extends SelectBuilder {
 		];
 	}
 	
-	public function from():string {
-		return "student";
+	public function from():array {
+		return [
+			"student",
+		];
 	}
 }
 ```
@@ -73,6 +75,48 @@ class StudentSelectByAge extends StudentSelect {
 }
 ```
 
+Example usage: A fluent class to _builds_ a SELECT query
+--------------------------------------------------------
+
+As you can see in the example above, `SqlQuery` functions always return an array of expressions. The `SqlBuilder` classes have the same methods (`select`, `from`, `where`, etc.) but take the expressions as parameters, acting as a **[fluent interface][fluent]**. 
+
+To create the same query as in the example above with fluent syntax:
+
+```php
+$selectQuery = new SelectBuilder(
+	"id",
+	"forename",
+	"surname",
+	"dateOfBirth"
+)->from(
+	"student"
+)->where(
+	"year(now()) - year(dateOfBirth) = :age"
+);
+```
+
+Conditionals
+------------
+
+Expressions within `where` and `having` clauses can be connected with logical operators, which are often combined. To avoid logical errors, `Condition` objects are used to specify the precedence of logic.
+
+For example, to select students with a specific age _and_ gender:
+
+```php
+class StudentSelectByAge extends StudentSelect {
+	public function where():array {
+		return [
+			new AndCondition("year(now()) - year(dateOfBirth) = :age"),
+			new AndCondition("gender = :gender"),
+		];
+	}
+}
+```
+
+Subqueries
+----------
+
+`SqlQuery` objects have a `__toString()` function, and `SqlBuilder` results create strings. Because of this, they can be used in place of any other expression within a Query or Builder.
 
 Limitations of plain SQL
 ------------------------
@@ -89,3 +133,4 @@ This library does not provide any SQL processing capabilities by design. Any dri
 [dry]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
 [view]: https://en.wikipedia.org/wiki/View_(SQL)
 [stored-procedure]: https://en.wikipedia.org/wiki/Stored_procedure
+[fluent]: https://en.wikipedia.org/wiki/Fluent_interface

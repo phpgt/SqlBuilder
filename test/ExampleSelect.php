@@ -1,6 +1,8 @@
 <?php
 namespace Gt\SqlBuilder;
 
+use Gt\SqlBuilder\Query\SelectQuery;
+
 class ExampleSelect extends SelectQuery {
 	public function select():array {
 		return [
