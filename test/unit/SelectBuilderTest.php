@@ -1,14 +1,14 @@
 <?php
 namespace Gt\SqlBuilder\Test;
 
-use Gt\SqlBuilder\SelectQuery;
+use Gt\SqlBuilder\SelectBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class SelectQueryTest extends TestCase {
+class SelectBuilderTest extends TestCase {
 	public function testDefaults() {
-		/** @var MockObject|SelectQuery $sut */
-		$sut = self::getMockForAbstractClass(SelectQuery::class);
+		/** @var MockObject|SelectBuilder $sut */
+		$sut = self::getMockForAbstractClass(SelectBuilder::class);
 		self::assertEmpty($sut->select());
 		self::assertEmpty($sut->from());
 		self::assertEmpty($sut->where());
@@ -20,7 +20,7 @@ class SelectQueryTest extends TestCase {
 	}
 
 	public function testToStringEmpty() {
-		$sut = self::getMockForAbstractClass(SelectQuery::class);
+		$sut = self::getMockForAbstractClass(SelectBuilder::class);
 		self::assertEmpty((string)$sut);
 	}
 }

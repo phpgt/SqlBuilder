@@ -1,7 +1,7 @@
 <?php
 namespace Gt\SqlBuilder;
 
-abstract class SelectQuery extends SqlQuery {
+abstract class SelectBuilder extends SqlBuilder {
 	public function __toString():string {
 		return $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
@@ -17,7 +17,7 @@ abstract class SelectQuery extends SqlQuery {
 		]);
 	}
 
-	/** @return string[]|SqlQuery[] */
+	/** @return string[]|SqlBuilder[] */
 	public function select():array {
 		return [];
 	}

@@ -4,7 +4,7 @@ namespace Gt\SqlBuilder;
 use Gt\SqlBuilder\Condition\AndCondition;
 use Gt\SqlBuilder\Condition\Condition;
 
-abstract class SqlQuery {
+abstract class SqlBuilder {
 	const PRE_QUERY_COMMENT = "/* preQuery */";
 	const POST_QUERY_COMMENT = "/* postQuery */";
 	const WHERE_CLAUSES = ["where", "having"];
