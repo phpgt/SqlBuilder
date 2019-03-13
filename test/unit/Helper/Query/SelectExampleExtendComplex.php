@@ -2,6 +2,7 @@
 namespace Gt\SqlBuilder\Test\Helper\Query;
 
 use Gt\SqlBuilder\Condition\AndCondition;
+use Gt\SqlBuilder\Condition\Condition;
 use Gt\SqlBuilder\Condition\OrCondition;
 
 class SelectExampleExtendComplex extends SelectExampleExtendWhere {
@@ -15,7 +16,7 @@ class SelectExampleExtendComplex extends SelectExampleExtendWhere {
 	public function where():array {
 		return array_merge(parent::where(), [
 			new AndCondition(
-				"location = 105",
+				new Condition("location = 105"),
 				new OrCondition("location is null")
 			)
 		]);

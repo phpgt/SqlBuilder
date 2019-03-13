@@ -1,8 +1,8 @@
 <?php
 namespace Gt\SqlBuilder\Condition;
 
-abstract class Condition {
-	protected $logic;
+class Condition {
+	protected $logic = "";
 	protected $parts;
 
 	/** @param string|Condition[] $parts */
