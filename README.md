@@ -75,8 +75,8 @@ class StudentSelectByAge extends StudentSelect {
 }
 ```
 
-Example usage: A fluent class to _builds_ a SELECT query
---------------------------------------------------------
+Example usage: A fluent class that _builds_ a SELECT query
+----------------------------------------------------------
 
 As you can see in the example above, `SqlQuery` functions always return an array of expressions. The `SqlBuilder` classes have the same methods (`select`, `from`, `where`, etc.) but take the expressions as parameters, acting as a **[fluent interface][fluent]**. 
 
@@ -94,6 +94,19 @@ $selectQuery = new SelectBuilder(
 	"year(now()) - year(dateOfBirth) = :age"
 );
 ```
+
+This is particularly useful for when there is a base query, say `StudentSelect`, and your code only requires a single additional condition. Rather than having to create a separate class for this single usage, it can be called inline:
+
+```php
+// Start by using a base StudentSelect, then add a single inline condition to it.
+$studentSelect = new StudentSelect(); 
+
+$selectQuery = new SelectBuilder($studentSelect)
+->where(
+	"year(now()) - year(dateOfBirth) = :age"
+);
+```
+
 
 Conditionals
 ------------
