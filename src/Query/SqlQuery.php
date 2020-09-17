@@ -9,6 +9,12 @@ abstract class SqlQuery {
 	const POST_QUERY_COMMENT = "/* postQuery */";
 	const WHERE_CLAUSES = ["where", "having"];
 
+	protected bool $subQuery;
+
+	public function __construct(bool $subQuery = false) {
+		$this->subQuery = $subQuery;
+	}
+
 	abstract public function __toString():string;
 
 	public function preQuery():string {

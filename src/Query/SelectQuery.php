@@ -3,7 +3,7 @@ namespace Gt\SqlBuilder\Query;
 
 class SelectQuery extends SqlQuery {
 	public function __toString():string {
-		return $this->processClauseList([
+		$query = $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"select" => $this->select(),
 			"from" => $this->from(),
@@ -18,18 +18,24 @@ class SelectQuery extends SqlQuery {
 			"where" => $this->where(),
 			"group by" => $this->groupBy(),
 			"having" => $this->having(),
-			"window" => $this->window(),
 			"order by" => $this->orderBy(),
 			"limit" => $this->limit(),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
+
+		if($this->subQuery) {
+			$query = "( $query )";
+		}
+
+		return $query;
 	}
 
-	/** @return string[]|SqlQuery[] */
+	/** @return string[] */
 	public function select():array {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function from():array {
 		return [];
 	}
@@ -69,26 +75,27 @@ class SelectQuery extends SqlQuery {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function where():array {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function groupBy():array {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function having():array {
 		return [];
 	}
 
-	public function window():array {
-		return [];
-	}
-
+	/** @return string[] */
 	public function orderBy():array {
 		return [];
 	}
 
+	/** @return string[] */
 	public function limit():array {
 		return [];
 	}

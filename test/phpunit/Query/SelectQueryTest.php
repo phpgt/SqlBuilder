@@ -9,6 +9,7 @@ use Gt\SqlBuilder\Test\Helper\Query\SelectExample;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendComplex;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhere;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleInnerJoin;
+use Gt\SqlBuilder\Test\Helper\Query\SelectExampleSubquery;
 use Gt\SqlBuilder\Test\QueryTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +23,6 @@ class SelectQueryTest extends QueryTestCase {
 		self::assertEmpty($sut->where());
 		self::assertEmpty($sut->groupBy());
 		self::assertEmpty($sut->having());
-		self::assertEmpty($sut->window());
 		self::assertEmpty($sut->orderBy());
 		self::assertEmpty($sut->limit());
 	}
@@ -54,5 +54,11 @@ class SelectQueryTest extends QueryTestCase {
 		$sut = new SelectExampleInnerJoin();
 		$sql = self::normalise($sut);
 		self::assertEquals("select id, name, dateOfBirth, module.title from student inner join student_has_module shm on shm.studentId = student.id inner join module on shm.moduleId = module.id where deletedAt is null", $sql);
+	}
+
+	public function testSelectSubquery() {
+		$sut = new SelectExampleSubquery();
+		$sql = self::normalise($sut);
+		self::assertEquals("select id, name, dateOfBirth from student where deletedAt is null and age > ( select minAge from consent where consent.district = student.district )", $sql);
 	}
 }
