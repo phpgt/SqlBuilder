@@ -33,6 +33,12 @@ abstract class SqlQuery {
 					$parts
 				);
 			}
+			elseif(strstr($name, "join")) {
+				$query .= $this->processJoinClause(
+					$name,
+					$parts
+				);
+			}
 			else {
 				$query .= $this->processClause(
 					$name,
@@ -90,6 +96,21 @@ abstract class SqlQuery {
 
 		$query .= $conditionalQuery;
 		$query .= "\n\n";
+		return $query;
+	}
+
+	private function processJoinClause(
+		string $name,
+		array $parts
+	):string {
+		$query = "";
+
+		foreach($parts as $i => $part) {
+			$query .= $name . " ";
+			$part = str_replace(["\n", "\t"], " ", $part);
+			$query .= $part . PHP_EOL;
+		}
+
 		return $query;
 	}
 }

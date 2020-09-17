@@ -2,10 +2,10 @@
 namespace Gt\SqlBuilder\Test\Query;
 
 use Gt\SqlBuilder\Query\SqlQuery;
+use Gt\SqlBuilder\Test\QueryTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
-class SqlQueryTest extends TestCase {
+class SqlQueryTest extends QueryTestCase {
 	public function testDefaults() {
 		/** @var MockObject|SqlQuery $sut */
 		$sut = self::getMockForAbstractClass(SqlQuery::class);

@@ -8,10 +8,12 @@ use Gt\SqlBuilder\Query\SelectQuery;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExample;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendComplex;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhere;
+use Gt\SqlBuilder\Test\Helper\Query\SelectExampleInnerJoin;
+use Gt\SqlBuilder\Test\QueryTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class SelectQueryTest extends TestCase {
+class SelectQueryTest extends QueryTestCase {
 	public function testDefaults() {
 		/** @var MockObject|SelectQuery $sut */
 		$sut = self::getMockForAbstractClass(SelectQuery::class);
@@ -39,18 +41,18 @@ class SelectQueryTest extends TestCase {
 	public function testSelectExampleExtendWhere() {
 		$sut = new SelectExampleExtendWhere();
 		$sql = self::normalise($sut);
-		self::assertEquals("select id, name, dateOfBirth from student where deletedAt is null and test = 0", $sql);
+		self::assertEquals("select id, name, dateOfBirth from student where deletedAt is null and test = 123", $sql);
 	}
 
 	public function testSelectExampleExtendComplex() {
 		$sut = new SelectExampleExtendComplex();
 		$sql = self::normalise($sut);
-		self::assertEquals("select id, name, dateOfBirth, category, location from student where deletedAt is null and test = 0 and ( location = 105 or location is null )", $sql);
+		self::assertEquals("select id, name, dateOfBirth, category, location from student where deletedAt is null and test = 123 and ( location = 105 or location is null )", $sql);
 	}
 
-	protected static function normalise(string $query):string {
-		$query = str_replace(["\n", "\t"], " ", $query);
-		$query  = str_replace("  ", " ", $query);
-		return trim($query);
+	public function testSelectInnerJoin() {
+		$sut = new SelectExampleInnerJoin();
+		$sql = self::normalise($sut);
+		self::assertEquals("select id, name, dateOfBirth, module.title from student inner join student_has_module shm on shm.studentId = student.id inner join module on shm.moduleId = module.id where deletedAt is null", $sql);
 	}
 }
