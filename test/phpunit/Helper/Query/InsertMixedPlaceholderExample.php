@@ -3,7 +3,7 @@ namespace Gt\SqlBuilder\Test\Helper\Query;
 
 use Gt\SqlBuilder\Query\InsertQuery;
 
-class InsertInferredPlaceholderExample extends InsertQuery {
+class InsertMixedPlaceholderExample extends InsertQuery {
 	public function into():array {
 		return [
 			"student",
@@ -14,6 +14,9 @@ class InsertInferredPlaceholderExample extends InsertQuery {
 		return [
 			"name",
 			"dateOfBirth",
+			"createdAt" => ":dateTimeNow",
+			"enabled" => 1,
+			"type",
 		];
 	}
 }

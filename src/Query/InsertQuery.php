@@ -31,15 +31,14 @@ class InsertQuery extends SqlQuery {
 	}
 
 	private function normaliseSet(array $setData):array {
-		reset($setData);
-		$firstKey = key($setData);
-		if(!is_int($firstKey)) {
-			return $setData;
-		}
-
 		$normalised = [];
 		foreach($setData as $i => $name) {
-			$normalised[$name] = ":$name";
+			if(is_int($i)) {
+				$normalised[$name] = ":$name";
+			}
+			else {
+				$normalised[$i] = $name;
+			}
 		}
 
 		return $normalised;
