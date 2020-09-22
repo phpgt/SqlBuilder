@@ -75,8 +75,8 @@ class StudentSelectByAge extends StudentSelect {
 }
 ```
 
-Example usage: A fluent class that _builds_ a SELECT query
-----------------------------------------------------------
+Example usage: A fluent class that _builds_ a SELECT query (coming in v2 release)
+---------------------------------------------------------------------------------
 
 As you can see in the example above, `SqlQuery` functions always return an array of expressions. The `SqlBuilder` classes have the same methods (`select`, `from`, `where`, etc.) but take the expressions as parameters, acting as a **[fluent interface][fluent]**. 
 
