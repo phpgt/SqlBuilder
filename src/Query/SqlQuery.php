@@ -45,6 +45,9 @@ abstract class SqlQuery {
 			elseif($name === "on duplicate key update") {
 				$query .= $this->processSetClause($parts, $name);
 			}
+			elseif($name === "partition") {
+				$query .= $this->processPartitionClause($parts);
+			}
 			elseif(strstr($name, "join")) {
 				$query .= $this->processJoinClause(
 					$name,
@@ -144,5 +147,13 @@ abstract class SqlQuery {
 		}
 
 		return $query . PHP_EOL;
+	}
+
+	private function processPartitionClause(array $parts):string {
+		return "partition ( "
+			. PHP_EOL
+			. implode(", " . PHP_EOL, $parts)
+			. " )"
+			. PHP_EOL;
 	}
 }

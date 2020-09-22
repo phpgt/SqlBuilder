@@ -6,6 +6,7 @@ class InsertQuery extends SqlQuery {
 		$query = $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"insert into" => $this->into(),
+			"partition" => $this->partition(),
 			"set" => $this->normaliseSet($this->set()),
 			"on duplicate key update" => $this->normaliseSet($this->onDuplicate()),
 		]);
@@ -38,6 +39,10 @@ class InsertQuery extends SqlQuery {
 	 * in the "set" section.
 	 */
 	public function onDuplicate():array {
+		return [];
+	}
+
+	public function partition():array {
 		return [];
 	}
 
