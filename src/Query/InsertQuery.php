@@ -7,6 +7,7 @@ class InsertQuery extends SqlQuery {
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"insert into" => $this->into(),
 			"set" => $this->normaliseSet($this->set()),
+			"on duplicate key update" => $this->normaliseSet($this->onDuplicate()),
 		]);
 
 		if($this->subQuery) {
@@ -27,6 +28,16 @@ class InsertQuery extends SqlQuery {
 	 * inferred as the column name prefixed with the colon character.
 	 */
 	public function set():array {
+		return [];
+	}
+
+	/**
+	 * Return an assignment list that matches the set() rules. It is often
+	 * useful to return a call to set() directly, as it is usual to list the
+	 * same assignments as part of the "on duplicate key update" section as
+	 * in the "set" section.
+	 */
+	public function onDuplicate():array {
 		return [];
 	}
 

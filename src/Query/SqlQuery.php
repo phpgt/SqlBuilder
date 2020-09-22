@@ -42,6 +42,9 @@ abstract class SqlQuery {
 			elseif($name === "set") {
 				$query .= $this->processSetClause($parts);
 			}
+			elseif($name === "on duplicate key update") {
+				$query .= $this->processSetClause($parts, $name);
+			}
 			elseif(strstr($name, "join")) {
 				$query .= $this->processJoinClause(
 					$name,
@@ -123,12 +126,15 @@ abstract class SqlQuery {
 		return $query;
 	}
 
-	private function processSetClause(array $parts):string {
+	private function processSetClause(
+		array $parts,
+		string $prefix = "set"
+	):string {
 		$query = "";
 
 		foreach($parts as $key => $value) {
 			if(strlen($query) === 0) {
-				$query .= "set " . PHP_EOL;
+				$query .= "$prefix " . PHP_EOL;
 			}
 			else {
 				$query .= ", " . PHP_EOL;
@@ -137,6 +143,6 @@ abstract class SqlQuery {
 			$query .= "$key = $value";
 		}
 
-		return $query;
+		return $query . PHP_EOL;
 	}
 }
