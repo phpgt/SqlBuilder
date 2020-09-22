@@ -39,6 +39,9 @@ abstract class SqlQuery {
 					$parts
 				);
 			}
+			elseif($name === "set") {
+				$query .= $this->processSetClause($parts);
+			}
 			elseif(strstr($name, "join")) {
 				$query .= $this->processJoinClause(
 					$name,
@@ -61,7 +64,7 @@ abstract class SqlQuery {
 		array $parts,
 		string $listChar = ","
 	):string {
-		if(empty($parts) || $parts[0] === "") {
+		if(empty($parts) || (isset($parts[0]) && $parts[0] === "")) {
 			return "";
 		}
 
@@ -115,6 +118,23 @@ abstract class SqlQuery {
 			$query .= $name . " ";
 			$part = str_replace(["\n", "\t"], " ", $part);
 			$query .= $part . PHP_EOL;
+		}
+
+		return $query;
+	}
+
+	private function processSetClause(array $parts):string {
+		$query = "";
+
+		foreach($parts as $key => $value) {
+			if(strlen($query) === 0) {
+				$query .= "set " . PHP_EOL;
+			}
+			else {
+				$query .= ", " . PHP_EOL;
+			}
+
+			$query .= "$key = $value";
 		}
 
 		return $query;
