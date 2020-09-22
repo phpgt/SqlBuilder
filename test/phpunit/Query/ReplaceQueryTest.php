@@ -1,13 +1,17 @@
 <?php
 namespace Gt\SqlBuilder\Test\Query;
 
+use Gt\SqlBuilder\Test\Helper\Query\ReplaceExample;
+use Gt\SqlBuilder\Test\Helper\Query\ReplaceInferredPlaceholderExample;
+use Gt\SqlBuilder\Test\Helper\Query\ReplaceMixedPlaceholderExample;
+use Gt\SqlBuilder\Test\Helper\Query\ReplacePartitionExample;
 use Gt\SqlBuilder\Test\QueryTestCase;
 
 class ReplaceQueryTest extends QueryTestCase {
 	public function testReplaceSimple() {
 		$sut = new ReplaceExample();
 		$sql = self::normalise($sut);
-		self::assertEquals("insert into student set name = :name, dateOfBirth = :dateOfBirth", $sql);
+		self::assertEquals("replace into student set name = :name, dateOfBirth = :dateOfBirth", $sql);
 	}
 
 	public function testReplaceInferredPlaceholder() {

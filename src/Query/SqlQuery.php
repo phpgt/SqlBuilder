@@ -150,6 +150,10 @@ abstract class SqlQuery {
 	}
 
 	private function processPartitionClause(array $parts):string {
+		if(empty($parts)) {
+			return "";
+		}
+
 		return "partition ( "
 			. PHP_EOL
 			. implode(", " . PHP_EOL, $parts)

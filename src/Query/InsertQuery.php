@@ -1,7 +1,7 @@
 <?php
 namespace Gt\SqlBuilder\Query;
 
-class InsertQuery extends SqlQuery {
+class InsertQuery extends ReplaceQuery {
 	public function __toString():string {
 		$query = $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
@@ -9,6 +9,7 @@ class InsertQuery extends SqlQuery {
 			"partition" => $this->partition(),
 			"set" => $this->normaliseSet($this->set()),
 			"on duplicate key update" => $this->normaliseSet($this->onDuplicate()),
+			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
 
 		if($this->subQuery) {
@@ -16,20 +17,6 @@ class InsertQuery extends SqlQuery {
 		}
 
 		return $query;
-	}
-
-	public function into():array {
-		return [];
-	}
-
-	/**
-	 * Return either an associative array where the keys are the column
-	 * names and the values are the assignment values, or an indexed array
-	 * where the values are the column names where the values will be
-	 * inferred as the column name prefixed with the colon character.
-	 */
-	public function set():array {
-		return [];
 	}
 
 	/**
@@ -40,23 +27,5 @@ class InsertQuery extends SqlQuery {
 	 */
 	public function onDuplicate():array {
 		return [];
-	}
-
-	public function partition():array {
-		return [];
-	}
-
-	private function normaliseSet(array $setData):array {
-		$normalised = [];
-		foreach($setData as $i => $name) {
-			if(is_int($i)) {
-				$normalised[$name] = ":$name";
-			}
-			else {
-				$normalised[$i] = $name;
-			}
-		}
-
-		return $normalised;
 	}
 }
