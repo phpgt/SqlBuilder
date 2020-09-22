@@ -9,6 +9,12 @@ abstract class SqlQuery {
 	const POST_QUERY_COMMENT = "/* postQuery */";
 	const WHERE_CLAUSES = ["where", "having"];
 
+	protected bool $subQuery;
+
+	public function __construct(bool $subQuery = false) {
+		$this->subQuery = $subQuery;
+	}
+
 	abstract public function __toString():string;
 
 	public function preQuery():string {
@@ -33,6 +39,21 @@ abstract class SqlQuery {
 					$parts
 				);
 			}
+			elseif($name === "set") {
+				$query .= $this->processSetClause($parts);
+			}
+			elseif($name === "on duplicate key update") {
+				$query .= $this->processSetClause($parts, $name);
+			}
+			elseif($name === "partition") {
+				$query .= $this->processPartitionClause($parts);
+			}
+			elseif(strstr($name, "join")) {
+				$query .= $this->processJoinClause(
+					$name,
+					$parts
+				);
+			}
 			else {
 				$query .= $this->processClause(
 					$name,
@@ -49,7 +70,7 @@ abstract class SqlQuery {
 		array $parts,
 		string $listChar = ","
 	):string {
-		if(empty($parts) || $parts[0] === "") {
+		if(empty($parts) || (isset($parts[0]) && $parts[0] === "")) {
 			return "";
 		}
 
@@ -91,5 +112,52 @@ abstract class SqlQuery {
 		$query .= $conditionalQuery;
 		$query .= "\n\n";
 		return $query;
+	}
+
+	private function processJoinClause(
+		string $name,
+		array $parts
+	):string {
+		$query = "";
+
+		foreach($parts as $i => $part) {
+			$query .= $name . " ";
+			$part = str_replace(["\n", "\t"], " ", $part);
+			$query .= $part . PHP_EOL;
+		}
+
+		return $query;
+	}
+
+	private function processSetClause(
+		array $parts,
+		string $prefix = "set"
+	):string {
+		$query = "";
+
+		foreach($parts as $key => $value) {
+			if(strlen($query) === 0) {
+				$query .= "$prefix " . PHP_EOL;
+			}
+			else {
+				$query .= ", " . PHP_EOL;
+			}
+
+			$query .= "$key = $value";
+		}
+
+		return $query . PHP_EOL;
+	}
+
+	private function processPartitionClause(array $parts):string {
+		if(empty($parts)) {
+			return "";
+		}
+
+		return "partition ( "
+			. PHP_EOL
+			. implode(", " . PHP_EOL, $parts)
+			. " )"
+			. PHP_EOL;
 	}
 }
