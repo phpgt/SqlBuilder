@@ -7,7 +7,7 @@ When a PHP application reaches scale, it is often the database that is the perfo
 
 ***
 
-<a href="https://circleci.com/gh/PhpGt/SqlBuilder" target="_blank">
+<a href="https://github.com/PhpGt/SqlBuilder/actions" target="_blank">
 	<img src="https://badge.status.php.gt/sqlbuilder-build.svg" alt="Build status" />
 </a>
 <a href="https://scrutinizer-ci.com/g/PhpGt/SqlBuilder" target="_blank">
