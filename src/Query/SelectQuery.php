@@ -20,6 +20,7 @@ class SelectQuery extends SqlQuery {
 			"having" => $this->having(),
 			"order by" => $this->orderBy(),
 			"limit" => $this->limit(),
+			"offset" => $this->offset(),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
 
@@ -30,73 +31,78 @@ class SelectQuery extends SqlQuery {
 		return $query;
 	}
 
-	/** @return string[] */
+	/** @return string[] One or more `select_expr`, typically a list of columns */
 	public function select():array {
 		return [];
 	}
 
-	/** @return string[]|SqlQuery[] */
+	/** @return string[]|SqlQuery[] One or more `table_reference` */
 	public function from():array {
 		return [];
 	}
 
-	/** @return string[] */
+	/** @return string[] Zero or more `join_specification` */
 	public function innerJoin():array {
 		return [];
 	}
 
-	/** @return string[] */
+	/** @return string[] Zero or more `join_specification` */
 	public function crossJoin():array {
 		return [];
 	}
 
-	/** @return string[] */
+	/** @return string[] Zero or more `join_specification` */
 	public function straightJoin():array {
 		return [];
 	}
 
-	/** @return string[] */
+	/** @return string[] Zero or more `join_specification` */
 	public function leftJoin():array {
 		return [];
 	}
 
-	/** @return string[] */
+	/** @return string[] Zero or more `join_specification` */
 	public function leftOuterJoin():array {
 		return [];
 	}
 
-	/** @return string[] */
+	/** @return string[] Zero or more `join_specification` */
 	public function rightJoin():array {
 		return [];
 	}
 
-	/** @return string[] */
+	/** @return string[] Zero or more `join_specification` */
 	public function rightOuterJoin():array {
 		return [];
 	}
 
-	/** @return string[]|SqlQuery[] */
+	/** @return string[]|SqlQuery[] Zero or more `where_condition` */
 	public function where():array {
 		return [];
 	}
 
-	/** @return string[]|SqlQuery[] */
+	/** @return string[] Zero or more `col_name | expr | position` */
 	public function groupBy():array {
 		return [];
 	}
 
-	/** @return string[]|SqlQuery[] */
+	/** @return string[]|SqlQuery[] Zero or more `having_condition` */
 	public function having():array {
 		return [];
 	}
 
-	/** @return string[] */
+	/** @return string[] Zero or more `col_name | expr | position` */
 	public function orderBy():array {
 		return [];
 	}
 
-	/** @return string[] */
-	public function limit():array {
-		return [];
+	/** @return ?int `row_count` */
+	public function limit():?int {
+		return null;
+	}
+
+	/** @return ?int `offset` */
+	public function offset():?int {
+		return null;
 	}
 }

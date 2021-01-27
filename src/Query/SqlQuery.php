@@ -9,11 +9,9 @@ abstract class SqlQuery {
 	const POST_QUERY_COMMENT = "/* postQuery */";
 	const WHERE_CLAUSES = ["where", "having"];
 
-	protected bool $subQuery;
-
-	public function __construct(bool $subQuery = false) {
-		$this->subQuery = $subQuery;
-	}
+	public function __construct(
+		protected bool $subQuery = false
+	) {}
 
 	abstract public function __toString():string;
 
@@ -25,7 +23,7 @@ abstract class SqlQuery {
 		return "";
 	}
 
-	/** @param array<string, string>|array<string, string[]> $clauses */
+	/** @param array<string, string>|array<string, string[]|mixed> $clauses */
 	protected function processClauseList(array $clauses):string {
 		$query = "";
 
@@ -54,6 +52,16 @@ abstract class SqlQuery {
 					$name,
 					$parts
 				);
+			}
+			elseif(strstr($name, "limit")) {
+				if(isset($parts[0])) {
+					$query .= "limit $parts[0]";
+				}
+			}
+			elseif(strstr($name, "offset")) {
+				if(isset($parts[0])) {
+					$query .= "offset $parts[0]";
+				}
 			}
 			else {
 				$query .= $this->processClause(
