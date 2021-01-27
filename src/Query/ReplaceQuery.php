@@ -18,10 +18,12 @@ class ReplaceQuery extends SqlQuery {
 		return $query;
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function into():array {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function partition():array {
 		return [];
 	}
@@ -31,11 +33,16 @@ class ReplaceQuery extends SqlQuery {
 	 * names and the values are the assignment values, or an indexed array
 	 * where the values are the column names where the values will be
 	 * inferred as the column name prefixed with the colon character.
+	 * @return string[]|SqlQuery[]
 	 */
 	public function set():array {
 		return [];
 	}
 
+	/**
+	 * @param array<int, string>|array<string, string> $setData
+	 * @return string[]|SqlQuery[]
+	 */
 	protected function normaliseSet(array $setData):array {
 		$normalised = [];
 		foreach($setData as $i => $name) {

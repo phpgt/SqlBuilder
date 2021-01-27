@@ -2,5 +2,5 @@
 namespace Gt\SqlBuilder\Condition;
 
 class AndCondition extends Condition {
-	protected $logic = "and";
+	protected string $logic = "and";
 }

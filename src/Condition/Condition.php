@@ -2,10 +2,11 @@
 namespace Gt\SqlBuilder\Condition;
 
 class Condition {
-	protected $logic = "";
-	protected $parts;
+	protected string $logic = "";
+	/** @var Condition[]|string[] $parts */
+	protected array $parts;
 
-	/** @param string|Condition[] $parts */
+	/** @param Condition|string $parts */
 	public function __construct(...$parts) {
 		$this->parts = $parts;
 	}

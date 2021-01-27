@@ -25,6 +25,7 @@ abstract class SqlQuery {
 		return "";
 	}
 
+	/** @param array<string, string>|array<string, string[]> $clauses */
 	protected function processClauseList(array $clauses):string {
 		$query = "";
 
@@ -65,6 +66,7 @@ abstract class SqlQuery {
 		return $query;
 	}
 
+	/** @param string[] $parts */
 	protected function processClause(
 		string $name,
 		array $parts,
@@ -81,6 +83,7 @@ abstract class SqlQuery {
 		return $query;
 	}
 
+	/** @param string[] $parts */
 	protected function processWhereClause(
 		string $name,
 		array $parts
@@ -114,6 +117,7 @@ abstract class SqlQuery {
 		return $query;
 	}
 
+	/** @param string[] $parts */
 	private function processJoinClause(
 		string $name,
 		array $parts
@@ -129,6 +133,7 @@ abstract class SqlQuery {
 		return $query;
 	}
 
+	/** @param string[] $parts */
 	private function processSetClause(
 		array $parts,
 		string $prefix = "set"
@@ -149,6 +154,7 @@ abstract class SqlQuery {
 		return $query . PHP_EOL;
 	}
 
+	/** @param string[] $parts */
 	private function processPartitionClause(array $parts):string {
 		if(empty($parts)) {
 			return "";

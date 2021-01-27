@@ -14,22 +14,27 @@ class DeleteQuery extends SqlQuery {
 		]);
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function from():array {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function partition():array {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function where():array {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function orderBy():array {
 		return [];
 	}
 
+	/** @return string[]|SqlQuery[] */
 	public function limit():array {
 		return [];
 	}
