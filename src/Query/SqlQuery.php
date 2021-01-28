@@ -38,6 +38,12 @@ abstract class SqlQuery {
 					$parts
 				);
 			}
+			elseif($name === "columns") {
+				$query .= $this->processList($parts);
+			}
+			elseif($name === "values") {
+				$query .= $this->processList($parts, $name);
+			}
 			elseif($name === "set") {
 				$query .= $this->processSetClause($parts);
 			}
@@ -46,6 +52,11 @@ abstract class SqlQuery {
 			}
 			elseif($name === "partition") {
 				$query .= $this->processPartitionClause($parts);
+			}
+			elseif(strstr($name, "rowSelect")) {
+				if(isset($parts[0]) && $parts[0] instanceof SelectQuery) {
+					$query .= $parts[0];
+				}
 			}
 			elseif(strstr($name, "join")) {
 				$query .= $this->processJoinClause(
@@ -70,6 +81,30 @@ abstract class SqlQuery {
 				);
 			}
 		}
+
+		return $query;
+	}
+
+	/** @param string[] $parts */
+	protected function processList(
+		array $parts,
+		string $prefix = ""
+	):string {
+		if(empty($parts)) {
+			return "";
+		}
+
+		$query = "$prefix (";
+		foreach($parts as $i => $part) {
+			if($i > 0) {
+				$query .= ",";
+			}
+
+			$query .= "\n\t";
+			$query .= $part;
+		}
+		$query .= "\n)";
+		$query .= "\n\n";
 
 		return $query;
 	}
