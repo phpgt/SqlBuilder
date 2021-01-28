@@ -19,7 +19,7 @@ When a PHP application reaches scale, it is often the database that is the perfo
 <a href="https://packagist.org/packages/PhpGt/SqlBuilder" target="_blank">
 	<img src="https://badge.status.php.gt/sqlbuilder-version.svg" alt="Current version" />
 </a>
-<a href="http://www.php.gt/dom" target="_blank">
+<a href="http://www.php.gt/sqlbuilder" target="_blank">
 	<img src="https://badge.status.php.gt/sqlbuilder-docs.svg" alt="PHP.Gt/SqlBuilder documentation" />
 </a>
 
@@ -40,10 +40,10 @@ from
 
 The above query will return a list of all students. The problem here is that when you come to need to select from the student table again, this time with some constraints such as an age range or ordered by surname, the whole query will need to be repeated and only a small portion of the original query will need to be changed.
 
-Instead, the following class can be used to represent the above query:
+Instead, the following class can be used to _represent_ the above query:
 
 ```php
-class StudentSelect extends SelectBuilder {
+class StudentSelect extends SelectQuery {
 	public function select():array {
 		return [
 			"id",
@@ -129,7 +129,7 @@ class StudentSelectByAge extends StudentSelect {
 Subqueries
 ----------
 
-`SqlQuery` objects have a `__toString()` function, and `SqlBuilder` results create strings. Because of this, they can be used in place of any other expression within a Query or Builder.
+`SqlQuery` objects have a `__toString()` function, and `SqlBuilder` results create `SqlQuery` instances. Because of this, they can be used in place of any other expression within a Query or Builder.
 
 Limitations of plain SQL
 ------------------------
