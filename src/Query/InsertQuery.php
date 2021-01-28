@@ -7,6 +7,8 @@ class InsertQuery extends ReplaceQuery {
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"insert into" => $this->into(),
 			"partition" => $this->partition(),
+			"columns" => $this->columns(),
+			"values" => $this->values(),
 			"set" => $this->normaliseSet($this->set()),
 			"on duplicate key update" => $this->normaliseSet($this->onDuplicate()),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
