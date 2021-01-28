@@ -24,7 +24,7 @@ class DeleteQuery extends SqlQuery {
 		return [];
 	}
 
-	/** @return string[]|SqlQuery[] */
+	/** @return array<int|string, int|string|SqlQuery> */
 	public function where():array {
 		return [];
 	}

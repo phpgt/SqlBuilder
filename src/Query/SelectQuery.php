@@ -31,7 +31,7 @@ class SelectQuery extends SqlQuery {
 		return $query;
 	}
 
-	/** @return string[] One or more `select_expr`, typically a list of columns */
+	/** @return string[]|SqlQuery[] One or more `select_expr`, typically a list of columns */
 	public function select():array {
 		return [];
 	}
@@ -76,7 +76,7 @@ class SelectQuery extends SqlQuery {
 		return [];
 	}
 
-	/** @return string[]|SqlQuery[] Zero or more `where_condition` */
+	/** @return array<int|string, int|string|SqlQuery> Zero or more `where_condition` */
 	public function where():array {
 		return [];
 	}
@@ -86,7 +86,7 @@ class SelectQuery extends SqlQuery {
 		return [];
 	}
 
-	/** @return string[]|SqlQuery[] Zero or more `having_condition` */
+	/** @return array<int|string, int|string|SqlQuery> Zero or more `having_condition` */
 	public function having():array {
 		return [];
 	}

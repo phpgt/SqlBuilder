@@ -24,7 +24,7 @@ class InsertQuery extends ReplaceQuery {
 	 * useful to return a call to set() directly, as it is usual to list the
 	 * same assignments as part of the "on duplicate key update" section as
 	 * in the "set" section.
-	 * @return string[]|SqlQuery[]
+	 * @return array<int|string, int|string>
 	 */
 	public function onDuplicate():array {
 		return [];
