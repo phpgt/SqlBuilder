@@ -10,6 +10,7 @@ class InsertQuery extends ReplaceQuery {
 			"columns" => $this->columns(),
 			"values" => $this->values(),
 			"set" => $this->normaliseSet($this->set()),
+			"rowSelect" => $this->select(),
 			"on duplicate key update" => $this->normaliseSet($this->onDuplicate()),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
