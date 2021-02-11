@@ -99,7 +99,7 @@ This is particularly useful for when there is a base query, say `StudentSelect`,
 
 ```php
 // Start by using a base StudentSelect, then add a single inline condition to it.
-$studentSelect = new StudentSelect(); 
+$studentSelect = new StudentSelect();
 
 $selectQuery = new SelectBuilder($studentSelect)
 ->where(

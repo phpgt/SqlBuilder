@@ -1,7 +1,7 @@
 <?php
 namespace Gt\SqlBuilder\Query;
 
-class DeleteQuery extends SqlQuery {
+abstract class DeleteQuery extends SqlQuery {
 	public function __toString():string {
 		return $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
@@ -15,9 +15,7 @@ class DeleteQuery extends SqlQuery {
 	}
 
 	/** @return string[]|SqlQuery[] */
-	public function from():array {
-		return [];
-	}
+	abstract public function from():array;
 
 	/** @return string[]|SqlQuery[] */
 	public function partition():array {

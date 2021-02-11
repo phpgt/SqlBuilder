@@ -1,9 +1,9 @@
 <?php
 namespace Gt\SqlBuilder\Query;
 
-class InsertQuery extends ReplaceQuery {
+abstract class InsertQuery extends ReplaceQuery {
 	public function __toString():string {
-		$query = $this->processClauseList([
+		return $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"insert into" => $this->into(),
 			"partition" => $this->partition(),
@@ -14,12 +14,6 @@ class InsertQuery extends ReplaceQuery {
 			"on duplicate key update" => $this->normaliseSet($this->onDuplicate()),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
-
-		if($this->subQuery) {
-			$query = "( $query )";
-		}
-
-		return $query;
 	}
 
 	/**
