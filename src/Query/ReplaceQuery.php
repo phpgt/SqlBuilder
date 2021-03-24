@@ -33,6 +33,16 @@ abstract class ReplaceQuery extends SqlQuery {
 		return [];
 	}
 
+	/** @return string[] Ordered list of column names to assign values to with values() */
+	public function columns():array {
+		return [];
+	}
+
+	/** @return string[] */
+	public function values():array {
+		return [];
+	}
+
 	/**
 	 * Return either an associative array where the keys are the column
 	 * names and the values are the assignment values, or an indexed array
