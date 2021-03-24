@@ -3,6 +3,7 @@ namespace Gt\SqlBuilder\Query;
 
 use Gt\SqlBuilder\Condition\AndCondition;
 use Gt\SqlBuilder\Condition\Condition;
+use Gt\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
 
 abstract class SqlQuery {
 	const PRE_QUERY_COMMENT = "/* preQuery */";
@@ -134,6 +135,7 @@ abstract class SqlQuery {
 		$query = $name;
 		$query .= "\n\t";
 
+		$shortParameterSyntax = null;
 		$conditionalQuery = "";
 		foreach($parts as $i => $part) {
 			if(is_string($part)) {
@@ -141,6 +143,16 @@ abstract class SqlQuery {
 			}
 
 			/** @var Condition $part */
+			if($partShortParameterSyntax = $part->getShortParameterSyntax()) {
+				if($shortParameterSyntax) {
+					if($shortParameterSyntax !== $partShortParameterSyntax) {
+						throw new MixedIndexedAndNamedParametersException();
+					}
+				}
+				else {
+					$shortParameterSyntax = $partShortParameterSyntax;
+				}
+			}
 
 			if(strlen($conditionalQuery) > 0) {
 				$conditionalQuery .= "\n";

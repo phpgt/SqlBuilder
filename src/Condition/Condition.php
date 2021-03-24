@@ -38,6 +38,14 @@ class Condition {
 				$brackets = true;
 				continue;
 			}
+			elseif(is_string($part)) {
+				if($part[0] === "?") {
+					$part = substr($part, 1) . " = ?";
+				}
+				elseif($part[0] === ":") {
+					$part = substr($part, 1) . " = $part";
+				}
+			}
 
 			if($i > 0) {
 				if($subLogic) {
@@ -57,5 +65,21 @@ class Condition {
 		}
 
 		return $condition;
+	}
+
+	public function getShortParameterSyntax():?string {
+		foreach($this->parts as $i => $part) {
+			if(!is_string($part)) {
+				continue;
+			}
+
+			$char1 = $part[0];
+			if($char1 === "?"
+			|| $char1 === ":") {
+				return $char1;
+			}
+		}
+
+		return null;
 	}
 }
