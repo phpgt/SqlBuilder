@@ -41,11 +41,9 @@ class Condition {
 			elseif(is_string($part)) {
 				if($part[0] === "?") {
 					$part = substr($part, 1) . " = ?";
-					$this->shortParameterSyntax = "?";
 				}
 				elseif($part[0] === ":") {
 					$part = substr($part, 1) . " = $part";
-					$this->shortParameterSyntax = ":";
 				}
 			}
 
