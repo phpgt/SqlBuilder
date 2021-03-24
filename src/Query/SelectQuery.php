@@ -1,7 +1,11 @@
 <?php
 namespace Gt\SqlBuilder\Query;
 
-class SelectQuery extends SqlQuery {
+abstract class SelectQuery extends SqlQuery {
+	public function __construct(
+		protected bool $subQuery = false
+	) {}
+
 	public function __toString():string {
 		$query = $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),

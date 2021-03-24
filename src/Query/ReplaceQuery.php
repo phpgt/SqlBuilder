@@ -1,9 +1,9 @@
 <?php
 namespace Gt\SqlBuilder\Query;
 
-class ReplaceQuery extends SqlQuery {
+abstract class ReplaceQuery extends SqlQuery {
 	public function __toString():string {
-		$query = $this->processClauseList([
+		return $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"replace into" => $this->into(),
 			"partition" => $this->partition(),
@@ -13,18 +13,10 @@ class ReplaceQuery extends SqlQuery {
 			"rowSelect" => $this->select(),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
-
-		if($this->subQuery) {
-			$query = "( $query )";
-		}
-
-		return $query;
 	}
 
 	/** @return string[]|SqlQuery[] */
-	public function into():array {
-		return [];
-	}
+	abstract public function into():array;
 
 	/** @return string[]|SqlQuery[] */
 	public function partition():array {

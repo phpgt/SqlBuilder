@@ -1,7 +1,7 @@
 <?php
 namespace Gt\SqlBuilder\Query;
 
-class UpdateQuery extends SqlQuery {
+abstract class UpdateQuery extends SqlQuery {
 	public function __toString():string {
 		return $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
@@ -15,14 +15,10 @@ class UpdateQuery extends SqlQuery {
 	}
 
 	/** @return string[]|SqlQuery[] */
-	public function update():array {
-		return [];
-	}
+	abstract public function update():array;
 
 	/** @return string[]|SqlQuery[] */
-	public function set():array {
-		return [];
-	}
+	abstract public function set():array;
 
 	/** @return array<int|string, int|string|SqlQuery> */
 	public function where():array {
