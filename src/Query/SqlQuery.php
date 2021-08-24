@@ -4,8 +4,9 @@ namespace Gt\SqlBuilder\Query;
 use Gt\SqlBuilder\Condition\AndCondition;
 use Gt\SqlBuilder\Condition\Condition;
 use Gt\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
+use Stringable;
 
-abstract class SqlQuery {
+abstract class SqlQuery implements Stringable {
 	const PRE_QUERY_COMMENT = "/* preQuery */";
 	const POST_QUERY_COMMENT = "/* postQuery */";
 	const WHERE_CLAUSES = ["where", "having"];
