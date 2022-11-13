@@ -16,7 +16,7 @@ abstract class CreateTableQuery extends SqlQuery {
 	/** @return string [IF NOT EXISTS] tbl_name */
 	abstract public function createTable():string;
 
-	/** @return string|SqlQuery */
+	/** @return string[]|SqlQuery[] */
 	public function createDefinition():array {
 		return [];
 	}
