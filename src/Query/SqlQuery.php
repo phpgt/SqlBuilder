@@ -72,6 +72,11 @@ abstract class SqlQuery implements Stringable {
 					$query .= "offset $parts[0]";
 				}
 			}
+			elseif(strstr($name, "create definition")) {
+				$query .= "(";
+				$query .= implode(", \n", $parts);
+				$query .= ")";
+			}
 			else {
 				$query .= $this->processClause(
 					$name,
