@@ -77,6 +77,9 @@ abstract class SqlQuery implements Stringable {
 				$query .= implode(", \n", $parts);
 				$query .= ")";
 			}
+			elseif(strstr($name, "alter options")) {
+				$query .= implode(", \n", $parts);
+			}
 			else {
 				$query .= $this->processClause(
 					$name,
