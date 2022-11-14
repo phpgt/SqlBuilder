@@ -16,4 +16,15 @@ class SelectBuilderTest extends QueryTestCase {
 			->from("testTable");
 		self::assertSame("select testColumn from testTable", self::normalise($sut));
 	}
+
+	public function testInnerJoin():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable")
+			->innerJoin("otherTable");
+		self::assertSame(
+			"select testColumn from testTable inner join otherTable",
+			self::normalise($sut),
+		);
+	}
 }

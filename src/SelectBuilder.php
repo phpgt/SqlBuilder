@@ -7,6 +7,7 @@ class SelectBuilder extends AbstractQueryBuilder {
 	const QUERY_PARTS = [
 		"select" => [],
 		"from" => [],
+		"inner join" => [],
 	];
 
 	/** @var array<string, array<string>> */
@@ -31,6 +32,10 @@ class SelectBuilder extends AbstractQueryBuilder {
 			function from():array {
 				return $this->parts["from"];
 			}
+
+			function innerJoin():array {
+				return $this->parts["inner join"];
+			}
 		};
 	}
 
@@ -41,6 +46,11 @@ class SelectBuilder extends AbstractQueryBuilder {
 
 	public function from(string...$tables):self {
 		$this->parts["from"] = $tables;
+		return $this;
+	}
+
+	public function innerJoin(string...$joinSpecifications):self {
+		$this->parts["inner join"] = $joinSpecifications;
 		return $this;
 	}
 }
