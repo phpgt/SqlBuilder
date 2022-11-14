@@ -9,4 +9,11 @@ class SelectBuilderTest extends QueryTestCase {
 		$sut->select("'test'");
 		self::assertSame("select 'test'", self::normalise($sut));
 	}
+
+	public function testFrom():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable");
+		self::assertSame("select testColumn from testTable", self::normalise($sut));
+	}
 }
