@@ -169,6 +169,26 @@ class SelectBuilderTest extends QueryTestCase {
 			"select testColumn from testTable offset 500",
 			self::normalise($sut)
 		);
+	}
 
+	/**
+	 * Note that the order of the chained functions is not the order of
+	 * correct SQL, although the SQL is output in the correct order.
+	 */
+	public function test_combination():void {
+		$sut = new SelectBuilder();
+		$sut->select("id", "createdAt", "email", "max(loginDateTime) as lastLogin")
+			->from("user")
+			->leftJoin("user_access on user.id = user_access.userId")
+			->where("email like '%@example.com'", "deletedAt is null")
+			->having("lastLogin > '2020-01-01'")
+			->limit(100)
+			->orderBy("email")
+			->groupBy("email");
+
+		self::assertSame(
+			"select id, createdAt, email, max(loginDateTime) as lastLogin from user left join user_access on user.id = user_access.userId where email like '%@example.com' and deletedAt is null group by email having lastLogin > '2020-01-01' order by email limit 100",
+			self::normalise($sut)
+		);
 	}
 }
