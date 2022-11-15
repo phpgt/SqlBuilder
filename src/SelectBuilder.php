@@ -1,6 +1,7 @@
 <?php
 namespace Gt\SqlBuilder;
 
+use Gt\SqlBuilder\Condition\Condition;
 use Gt\SqlBuilder\Query\SelectQuery;
 
 class SelectBuilder extends AbstractQueryBuilder {
@@ -13,6 +14,7 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"leftOuterJoin" => [],
 		"rightJoin" => [],
 		"rightOuterJoin" => [],
+		"where" => [],
 	];
 
 	/** @var array<string, array<string>> */
@@ -63,6 +65,10 @@ class SelectBuilder extends AbstractQueryBuilder {
 			function rightOuterJoin():array {
 				return $this->parts["rightOuterJoin"];
 			}
+
+			function where():array {
+				return $this->parts["where"];
+			}
 		};
 	}
 
@@ -104,5 +110,9 @@ class SelectBuilder extends AbstractQueryBuilder {
 	public function rightOuterJoin(string...$joinSpecifications):self {
 		$this->parts["rightOuterJoin"] = $joinSpecifications;
 		return $this;
+	}
+
+	public function where(string|Condition...$conditions) {
+		$this->parts["where"] = $conditions;
 	}
 }

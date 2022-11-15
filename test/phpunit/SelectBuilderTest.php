@@ -89,4 +89,29 @@ class SelectBuilderTest extends QueryTestCase {
 			self::normalise($sut)
 		);
 	}
+
+	public function testWhere_stringCondition():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable")
+			->where("id = 123");
+		self::assertSame(
+			"select testColumn from testTable where id = 123",
+			self::normalise($sut)
+		);
+	}
+
+	public function testWhere_multipleStringCondition():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable")
+			->where(
+				"id = 123",
+				"createdAt > '2020-01-01'"
+			);
+		self::assertSame(
+			"select testColumn from testTable where id = 123 and createdAt > '2020-01-01'",
+			self::normalise($sut)
+		);
+	}
 }
