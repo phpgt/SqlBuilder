@@ -30,7 +30,6 @@ abstract class UpdateQuery extends SqlQuery {
 		return $this->dynamicReturn(__FUNCTION__);
 	}
 
-	/** @return string[]|SqlQuery[] */
 	public function limit():?int {
 		return $this->dynamicReturn(__FUNCTION__);
 	}

@@ -230,6 +230,7 @@ abstract class SqlQuery implements Stringable {
 			. PHP_EOL;
 	}
 
+	/** @return array<int|string, int|string|SqlQuery>|int|SelectQuery|null */
 	protected function dynamicReturn(string $functionName, ?string $className = null):array|int|SelectQuery|null {
 		$functionName = str_replace("_", " ", $functionName);
 		$functionName = ucwords($functionName);
