@@ -17,6 +17,7 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"where" => [],
 		"groupBy" => [],
 		"having" => [],
+		"orderBy" => [],
 	];
 
 	/** @var array<string, array<string>> */
@@ -79,6 +80,10 @@ class SelectBuilder extends AbstractQueryBuilder {
 			function having():array {
 				return $this->parts["having"];
 			}
+
+			function orderBy():array {
+				return $this->parts["orderBy"];
+			}
 		};
 	}
 
@@ -134,6 +139,11 @@ class SelectBuilder extends AbstractQueryBuilder {
 
 	public function having(string|Condition...$conditions):self {
 		$this->parts["having"] = $conditions;
+		return $this;
+	}
+
+	public function orderBy(string...$orderBy):self {
+		$this->parts["orderBy"] = $orderBy;
 		return $this;
 	}
 }

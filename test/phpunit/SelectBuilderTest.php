@@ -137,4 +137,15 @@ class SelectBuilderTest extends QueryTestCase {
 			self::normalise($sut)
 		);
 	}
+
+	public function testOrderBy():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable")
+			->orderBy("createdAt desc");
+		self::assertSame(
+			"select testColumn from testTable order by createdAt desc",
+			self::normalise($sut)
+		);
+	}
 }
