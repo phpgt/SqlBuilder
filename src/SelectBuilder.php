@@ -22,13 +22,6 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"offset" => null,
 	];
 
-	/** @var array<string, array<string>> */
-	private array $parts;
-
-	public function __construct() {
-		$this->parts = self::QUERY_PARTS;
-	}
-
 	// NOTE: This doesn't need to do any lazy loading. THat's the job of the
 	// database to decide what query to build.
 	public function __toString():string {
@@ -96,75 +89,5 @@ class SelectBuilder extends AbstractQueryBuilder {
 				return $this->parts["offset"];
 			}
 		};
-	}
-
-	public function select(string...$columns):self {
-		$this->parts["select"] = $columns;
-		return $this;
-	}
-
-	public function from(string...$tables):self {
-		$this->parts["from"] = $tables;
-		return $this;
-	}
-
-	public function innerJoin(string...$joinSpecifications):self {
-		$this->parts["innerJoin"] = $joinSpecifications;
-		return $this;
-	}
-
-	public function crossJoin(string...$joinSpecifications):self {
-		$this->parts["crossJoin"] = $joinSpecifications;
-		return $this;
-	}
-
-	public function leftJoin(string...$joinSpecifications):self {
-		$this->parts["leftJoin"] = $joinSpecifications;
-		return $this;
-	}
-
-	public function leftOuterJoin(string...$joinSpecifications):self {
-		$this->parts["leftOuterJoin"] = $joinSpecifications;
-		return $this;
-	}
-
-	public function rightJoin(string...$joinSpecifications):self {
-		$this->parts["rightJoin"] = $joinSpecifications;
-		return $this;
-	}
-
-	public function rightOuterJoin(string...$joinSpecifications):self {
-		$this->parts["rightOuterJoin"] = $joinSpecifications;
-		return $this;
-	}
-
-	public function where(string|Condition...$conditions):self {
-		$this->parts["where"] = $conditions;
-		return $this;
-	}
-
-	public function groupBy(string...$groupBy):self {
-		$this->parts["groupBy"] = $groupBy;
-		return $this;
-	}
-
-	public function having(string|Condition...$conditions):self {
-		$this->parts["having"] = $conditions;
-		return $this;
-	}
-
-	public function orderBy(string...$orderBy):self {
-		$this->parts["orderBy"] = $orderBy;
-		return $this;
-	}
-
-	public function limit(?int $limit):self {
-		$this->parts["limit"] = $limit;
-		return $this;
-	}
-
-	public function offset(?int $offset):self {
-		$this->parts["offset"] = $offset;
-		return $this;
 	}
 }
