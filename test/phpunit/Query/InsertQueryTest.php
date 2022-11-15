@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection SqlNoDataSourceInspection */
+/** @noinspection SqlResolve */
 namespace Gt\SqlBuilder\Test\Query;
 
 use Gt\SqlBuilder\Test\Helper\Query\InsertExample;

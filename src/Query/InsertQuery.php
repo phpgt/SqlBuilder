@@ -24,6 +24,6 @@ abstract class InsertQuery extends ReplaceQuery {
 	 * @return array<int|string, int|string>
 	 */
 	public function onDuplicate():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 }

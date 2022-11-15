@@ -22,17 +22,17 @@ abstract class UpdateQuery extends SqlQuery {
 
 	/** @return array<int|string, int|string|SqlQuery> */
 	public function where():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return string[]|SqlQuery[] */
 	public function orderBy():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return string[]|SqlQuery[] */
-	public function limit():array {
-		return [];
+	public function limit():?int {
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/**

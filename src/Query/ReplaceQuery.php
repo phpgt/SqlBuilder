@@ -20,17 +20,17 @@ abstract class ReplaceQuery extends SqlQuery {
 
 	/** @return string[]|SqlQuery[] */
 	public function partition():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return string[] Ordered list of column names to assign values to with values() */
 	public function columns():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return string[] */
 	public function values():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/**
@@ -41,11 +41,11 @@ abstract class ReplaceQuery extends SqlQuery {
 	 * @return array<int|string, int|string>
 	 */
 	public function set():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	public function select():?SelectQuery {
-		return null;
+		return $this->dynamicReturn(__FUNCTION__, SelectQuery::class);
 	}
 
 	/**

@@ -4,9 +4,6 @@ namespace Gt\SqlBuilder\Query;
 use Gt\SqlBuilder\Condition\Condition;
 
 abstract class SelectQuery extends SqlQuery {
-	/** @var array<string, array<string|Condition>|int> */
-	private array $dynamicParts;
-
 	public function __construct(
 		protected bool $subQuery = false
 	) {}
@@ -118,18 +115,5 @@ abstract class SelectQuery extends SqlQuery {
 	/** @return ?int `offset` */
 	public function offset():?int {
 		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	protected function dynamicReturn(string $functionName):array|int|null {
-		$functionName = str_replace("_", " ", $functionName);
-		$functionName = ucwords($functionName);
-		$functionName = str_replace(" ", "", $functionName);
-		$functionName = lcfirst($functionName);
-
-		$default = ($functionName === "limit" || $functionName === "offset")
-			? null
-			: [];
-
-		return $this->dynamicParts[$functionName] ?? $default;
 	}
 }

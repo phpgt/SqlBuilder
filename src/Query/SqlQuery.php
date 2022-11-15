@@ -11,6 +11,9 @@ abstract class SqlQuery implements Stringable {
 	const POST_QUERY_COMMENT = "/* postQuery */";
 	const WHERE_CLAUSES = ["where", "having"];
 
+	/** @var array<string, array<string|Condition>|int> */
+	protected array $dynamicParts;
+
 	abstract public function __toString():string;
 
 	public function preQuery():string {
@@ -225,5 +228,18 @@ abstract class SqlQuery implements Stringable {
 			. implode(", " . PHP_EOL, $parts)
 			. " )"
 			. PHP_EOL;
+	}
+
+	protected function dynamicReturn(string $functionName, ?string $className = null):array|int|SelectQuery|null {
+		$functionName = str_replace("_", " ", $functionName);
+		$functionName = ucwords($functionName);
+		$functionName = str_replace(" ", "", $functionName);
+		$functionName = lcfirst($functionName);
+
+		$default = (!is_null($className) || $functionName === "limit" || $functionName === "offset")
+			? null
+			: [];
+
+		return $this->dynamicParts[$functionName] ?? $default;
 	}
 }
