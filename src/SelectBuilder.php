@@ -7,7 +7,8 @@ class SelectBuilder extends AbstractQueryBuilder {
 	const QUERY_PARTS = [
 		"select" => [],
 		"from" => [],
-		"inner join" => [],
+		"innerJoin" => [],
+		"crossJoin" => [],
 	];
 
 	/** @var array<string, array<string>> */
@@ -17,6 +18,8 @@ class SelectBuilder extends AbstractQueryBuilder {
 		$this->parts = self::QUERY_PARTS;
 	}
 
+	// NOTE: This doesn't need to do any lazy loading. THat's the job of the
+	// database to decide what query to build.
 	public function __toString():string {
 		return new class($this->parts) extends SelectQuery {
 			public function __construct(
@@ -34,7 +37,11 @@ class SelectBuilder extends AbstractQueryBuilder {
 			}
 
 			function innerJoin():array {
-				return $this->parts["inner join"];
+				return $this->parts["innerJoin"];
+			}
+
+			function crossJoin():array {
+				return $this->parts["crossJoin"];
 			}
 		};
 	}
@@ -50,7 +57,12 @@ class SelectBuilder extends AbstractQueryBuilder {
 	}
 
 	public function innerJoin(string...$joinSpecifications):self {
-		$this->parts["inner join"] = $joinSpecifications;
+		$this->parts["innerJoin"] = $joinSpecifications;
+		return $this;
+	}
+
+	public function crossJoin(string...$joinSpecifications):self {
+		$this->parts["crossJoin"] = $joinSpecifications;
 		return $this;
 	}
 }
