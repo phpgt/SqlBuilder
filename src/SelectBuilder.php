@@ -19,6 +19,7 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"having" => [],
 		"orderBy" => [],
 		"limit" => null,
+		"offset" => null,
 	];
 
 	/** @var array<string, array<string>> */
@@ -32,6 +33,7 @@ class SelectBuilder extends AbstractQueryBuilder {
 	// database to decide what query to build.
 	public function __toString():string {
 		return new class($this->parts) extends SelectQuery {
+			/** @param array<string, string[]|Condition[]>|array<string, ?int> $parts */
 			public function __construct(
 				private array $parts
 			) {
@@ -88,6 +90,10 @@ class SelectBuilder extends AbstractQueryBuilder {
 
 			function limit():?int {
 				return $this->parts["limit"];
+			}
+
+			function offset():?int {
+				return $this->parts["offset"];
 			}
 		};
 	}
@@ -154,6 +160,11 @@ class SelectBuilder extends AbstractQueryBuilder {
 
 	public function limit(?int $limit):self {
 		$this->parts["limit"] = $limit;
+		return $this;
+	}
+
+	public function offset(?int $offset):self {
+		$this->parts["offset"] = $offset;
 		return $this;
 	}
 }

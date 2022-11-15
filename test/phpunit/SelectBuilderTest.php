@@ -159,4 +159,16 @@ class SelectBuilderTest extends QueryTestCase {
 			self::normalise($sut)
 		);
 	}
+
+	public function testOffset():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable")
+			->offset(500);
+		self::assertSame(
+			"select testColumn from testTable offset 500",
+			self::normalise($sut)
+		);
+
+	}
 }
