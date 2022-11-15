@@ -16,6 +16,11 @@ abstract class SqlQuery implements Stringable {
 
 	abstract public function __toString():string;
 
+	/** @param array<string, array<string|Condition>|int> $parts */
+	public function setDynamicParts(array $parts):void {
+		$this->dynamicParts = $parts;
+	}
+
 	public function preQuery():string {
 		return "";
 	}
@@ -67,12 +72,12 @@ abstract class SqlQuery implements Stringable {
 			}
 			elseif(strstr($name, "limit")) {
 				if(isset($parts[0])) {
-					$query .= "limit $parts[0]";
+					$query .= "\nlimit $parts[0]";
 				}
 			}
 			elseif(strstr($name, "offset")) {
 				if(isset($parts[0])) {
-					$query .= "offset $parts[0]";
+					$query .= "\noffset $parts[0]";
 				}
 			}
 			elseif(strstr($name, "create definition")) {

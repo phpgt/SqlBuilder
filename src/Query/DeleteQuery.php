@@ -15,7 +15,9 @@ abstract class DeleteQuery extends SqlQuery {
 	}
 
 	/** @return string[]|SqlQuery[] */
-	abstract public function from():array;
+	public function from():array {
+		return $this->dynamicReturn(__FUNCTION__);
+	}
 
 	/** @return string[]|SqlQuery[] */
 	public function partition():array {

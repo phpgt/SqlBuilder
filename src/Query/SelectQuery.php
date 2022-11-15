@@ -1,8 +1,6 @@
 <?php
 namespace Gt\SqlBuilder\Query;
 
-use Gt\SqlBuilder\Condition\Condition;
-
 abstract class SelectQuery extends SqlQuery {
 	public function __construct(
 		protected bool $subQuery = false
@@ -35,11 +33,6 @@ abstract class SelectQuery extends SqlQuery {
 		}
 
 		return $query;
-	}
-
-	/** @param array<string, array<string|Condition>|int> $parts */
-	public function setDynamicParts(array $parts):void {
-		$this->dynamicParts = $parts;
 	}
 
 	/** @return string[]|SqlQuery[] One or more `select_expr`, typically a list of columns */

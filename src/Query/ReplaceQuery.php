@@ -16,7 +16,9 @@ abstract class ReplaceQuery extends SqlQuery {
 	}
 
 	/** @return string[]|SqlQuery[] */
-	abstract public function into():array;
+	public function into():array {
+		return $this->dynamicReturn(__FUNCTION__);
+	}
 
 	/** @return string[]|SqlQuery[] */
 	public function partition():array {
