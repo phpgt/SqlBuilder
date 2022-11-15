@@ -9,6 +9,10 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"from" => [],
 		"innerJoin" => [],
 		"crossJoin" => [],
+		"leftJoin" => [],
+		"leftOuterJoin" => [],
+		"rightJoin" => [],
+		"rightOuterJoin" => [],
 	];
 
 	/** @var array<string, array<string>> */
@@ -43,6 +47,22 @@ class SelectBuilder extends AbstractQueryBuilder {
 			function crossJoin():array {
 				return $this->parts["crossJoin"];
 			}
+
+			function leftJoin():array {
+				return $this->parts["leftJoin"];
+			}
+
+			function leftOuterJoin():array {
+				return $this->parts["leftOuterJoin"];
+			}
+
+			function rightJoin():array {
+				return $this->parts["rightJoin"];
+			}
+
+			function rightOuterJoin():array {
+				return $this->parts["rightOuterJoin"];
+			}
 		};
 	}
 
@@ -63,6 +83,26 @@ class SelectBuilder extends AbstractQueryBuilder {
 
 	public function crossJoin(string...$joinSpecifications):self {
 		$this->parts["crossJoin"] = $joinSpecifications;
+		return $this;
+	}
+
+	public function leftJoin(string...$joinSpecifications):self {
+		$this->parts["leftJoin"] = $joinSpecifications;
+		return $this;
+	}
+
+	public function leftOuterJoin(string...$joinSpecifications):self {
+		$this->parts["leftOuterJoin"] = $joinSpecifications;
+		return $this;
+	}
+
+	public function rightJoin(string...$joinSpecifications):self {
+		$this->parts["rightJoin"] = $joinSpecifications;
+		return $this;
+	}
+
+	public function rightOuterJoin(string...$joinSpecifications):self {
+		$this->parts["rightOuterJoin"] = $joinSpecifications;
 		return $this;
 	}
 }
