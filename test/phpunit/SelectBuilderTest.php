@@ -114,4 +114,15 @@ class SelectBuilderTest extends QueryTestCase {
 			self::normalise($sut)
 		);
 	}
+
+	public function testGroupBy():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable")
+			->groupBy("category");
+		self::assertSame(
+			"select testColumn from testTable group by category",
+			self::normalise($sut)
+		);
+	}
 }

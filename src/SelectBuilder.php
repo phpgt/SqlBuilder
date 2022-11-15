@@ -15,6 +15,7 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"rightJoin" => [],
 		"rightOuterJoin" => [],
 		"where" => [],
+		"groupBy" => [],
 	];
 
 	/** @var array<string, array<string>> */
@@ -69,6 +70,10 @@ class SelectBuilder extends AbstractQueryBuilder {
 			function where():array {
 				return $this->parts["where"];
 			}
+
+			function groupBy():array {
+				return $this->parts["groupBy"];
+			}
 		};
 	}
 
@@ -112,7 +117,13 @@ class SelectBuilder extends AbstractQueryBuilder {
 		return $this;
 	}
 
-	public function where(string|Condition...$conditions) {
+	public function where(string|Condition...$conditions):self {
 		$this->parts["where"] = $conditions;
+		return $this;
+	}
+
+	public function groupBy(string...$groupBy):self {
+		$this->parts["groupBy"] = $groupBy;
+		return $this;
 	}
 }
