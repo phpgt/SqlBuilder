@@ -18,6 +18,7 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"groupBy" => [],
 		"having" => [],
 		"orderBy" => [],
+		"limit" => null,
 	];
 
 	/** @var array<string, array<string>> */
@@ -84,6 +85,10 @@ class SelectBuilder extends AbstractQueryBuilder {
 			function orderBy():array {
 				return $this->parts["orderBy"];
 			}
+
+			function limit():?int {
+				return $this->parts["limit"];
+			}
 		};
 	}
 
@@ -144,6 +149,11 @@ class SelectBuilder extends AbstractQueryBuilder {
 
 	public function orderBy(string...$orderBy):self {
 		$this->parts["orderBy"] = $orderBy;
+		return $this;
+	}
+
+	public function limit(?int $limit):self {
+		$this->parts["limit"] = $limit;
 		return $this;
 	}
 }

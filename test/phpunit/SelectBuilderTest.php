@@ -148,4 +148,15 @@ class SelectBuilderTest extends QueryTestCase {
 			self::normalise($sut)
 		);
 	}
+
+	public function testLimit():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable")
+			->limit(15);
+		self::assertSame(
+			"select testColumn from testTable limit 15",
+			self::normalise($sut)
+		);
+	}
 }
