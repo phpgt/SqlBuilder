@@ -125,4 +125,16 @@ class SelectBuilderTest extends QueryTestCase {
 			self::normalise($sut)
 		);
 	}
+
+	public function testHaving():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("testTable")
+			->having("testColumn = 'example'")
+			->where("id > 999");
+		self::assertSame(
+			"select testColumn from testTable where id > 999 having testColumn = 'example'",
+			self::normalise($sut)
+		);
+	}
 }
