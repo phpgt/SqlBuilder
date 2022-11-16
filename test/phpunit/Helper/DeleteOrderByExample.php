@@ -16,9 +16,7 @@ class DeleteOrderByExample extends DeleteQuery {
 		];
 	}
 
-	public function limit():array {
-		return [
-			10,
-		];
+	public function limit():int {
+		return 10;
 	}
 }

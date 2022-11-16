@@ -16,21 +16,23 @@ abstract class ReplaceQuery extends SqlQuery {
 	}
 
 	/** @return string[]|SqlQuery[] */
-	abstract public function into():array;
+	public function into():array {
+		return $this->dynamicReturn(__FUNCTION__);
+	}
 
 	/** @return string[]|SqlQuery[] */
 	public function partition():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return string[] Ordered list of column names to assign values to with values() */
 	public function columns():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return string[] */
 	public function values():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/**
@@ -41,11 +43,11 @@ abstract class ReplaceQuery extends SqlQuery {
 	 * @return array<int|string, int|string>
 	 */
 	public function set():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	public function select():?SelectQuery {
-		return null;
+		return $this->dynamicReturn(__FUNCTION__, SelectQuery::class);
 	}
 
 	/**
@@ -54,6 +56,11 @@ abstract class ReplaceQuery extends SqlQuery {
 	 */
 	protected function normaliseSet(array $setData):array {
 		$normalised = [];
+
+		if(isset($setData[0]) && is_array($setData[0])) {
+			$setData = $setData[0];
+		}
+
 		foreach($setData as $i => $name) {
 			if(is_int($i)) {
 				$normalised[$name] = ":$name";

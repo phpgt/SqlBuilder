@@ -15,25 +15,26 @@ abstract class DeleteQuery extends SqlQuery {
 	}
 
 	/** @return string[]|SqlQuery[] */
-	abstract public function from():array;
+	public function from():array {
+		return $this->dynamicReturn(__FUNCTION__);
+	}
 
 	/** @return string[]|SqlQuery[] */
 	public function partition():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return array<int|string, int|string|SqlQuery> */
 	public function where():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return string[]|SqlQuery[] */
 	public function orderBy():array {
-		return [];
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 
-	/** @return string[]|SqlQuery[] */
-	public function limit():array {
-		return [];
+	public function limit():?int {
+		return $this->dynamicReturn(__FUNCTION__);
 	}
 }

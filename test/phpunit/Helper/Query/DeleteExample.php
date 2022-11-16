@@ -16,7 +16,7 @@ class DeleteExample extends DeleteQuery {
 		];
 	}
 
-	public function limit():array {
-		return [1];
+	public function limit():int {
+		return 1;
 	}
 }

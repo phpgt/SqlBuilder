@@ -11,7 +11,15 @@ abstract class SqlQuery implements Stringable {
 	const POST_QUERY_COMMENT = "/* postQuery */";
 	const WHERE_CLAUSES = ["where", "having"];
 
+	/** @var array<string, array<string|Condition>|int> */
+	protected array $dynamicParts;
+
 	abstract public function __toString():string;
+
+	/** @param array<string, array<string|Condition>|int> $parts */
+	public function setDynamicParts(array $parts):void {
+		$this->dynamicParts = $parts;
+	}
 
 	public function preQuery():string {
 		return "";
@@ -64,12 +72,12 @@ abstract class SqlQuery implements Stringable {
 			}
 			elseif(strstr($name, "limit")) {
 				if(isset($parts[0])) {
-					$query .= "limit $parts[0]";
+					$query .= "\nlimit $parts[0]";
 				}
 			}
 			elseif(strstr($name, "offset")) {
 				if(isset($parts[0])) {
-					$query .= "offset $parts[0]";
+					$query .= "\noffset $parts[0]";
 				}
 			}
 			elseif(strstr($name, "create definition")) {
@@ -225,5 +233,19 @@ abstract class SqlQuery implements Stringable {
 			. implode(", " . PHP_EOL, $parts)
 			. " )"
 			. PHP_EOL;
+	}
+
+	/** @return array<int|string, int|string|SqlQuery>|int|SelectQuery|null */
+	protected function dynamicReturn(string $functionName, ?string $className = null):array|int|SelectQuery|null {
+		$functionName = str_replace("_", " ", $functionName);
+		$functionName = ucwords($functionName);
+		$functionName = str_replace(" ", "", $functionName);
+		$functionName = lcfirst($functionName);
+
+		$default = (!is_null($className) || $functionName === "limit" || $functionName === "offset")
+			? null
+			: [];
+
+		return $this->dynamicParts[$functionName] ?? $default;
 	}
 }
