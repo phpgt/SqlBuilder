@@ -68,7 +68,7 @@ class Condition {
 	}
 
 	public function getShortParameterSyntax():?string {
-		foreach($this->parts as $i => $part) {
+		foreach($this->parts as $part) {
 			if(!is_string($part)) {
 				continue;
 			}

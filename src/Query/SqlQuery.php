@@ -154,7 +154,7 @@ abstract class SqlQuery implements Stringable {
 
 		$shortParameterSyntax = null;
 		$conditionalQuery = "";
-		foreach($parts as $i => $part) {
+		foreach($parts as $part) {
 			if(is_string($part)) {
 				$part = new AndCondition($part);
 			}
@@ -192,7 +192,7 @@ abstract class SqlQuery implements Stringable {
 	):string {
 		$query = "";
 
-		foreach($parts as $i => $part) {
+		foreach($parts as $part) {
 			$query .= $name . " ";
 			$part = str_replace(["\n", "\t"], " ", $part);
 			$query .= $part . PHP_EOL;
@@ -236,16 +236,26 @@ abstract class SqlQuery implements Stringable {
 	}
 
 	/** @return array<int|string, int|string|SqlQuery>|int|SelectQuery|null */
-	protected function dynamicReturn(string $functionName, ?string $className = null):array|int|SelectQuery|null {
+	protected function dynamicReturn(
+		string $functionName,
+		?string $className = null,
+	):array|int|SelectQuery|null {
 		$functionName = str_replace("_", " ", $functionName);
 		$functionName = ucwords($functionName);
 		$functionName = str_replace(" ", "", $functionName);
 		$functionName = lcfirst($functionName);
 
-		$default = (!is_null($className) || $functionName === "limit" || $functionName === "offset")
-			? null
-			: [];
+		$default = $this->needsDefaultValue($functionName, $className) ? [] : null;
 
 		return $this->dynamicParts[$functionName] ?? $default;
+	}
+
+	private function needsDefaultValue(
+		string $functionName,
+		?string $className,
+	):bool {
+		return is_null($className)
+			&& $functionName !== "limit"
+			&& $functionName !== "offset";
 	}
 }

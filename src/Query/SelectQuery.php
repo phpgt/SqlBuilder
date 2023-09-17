@@ -13,7 +13,7 @@ abstract class SelectQuery extends SqlQuery {
 			"from" => $this->from(),
 			"inner join" => $this->innerJoin(),
 			"cross join" => $this->crossJoin(),
-			// The underscore is not a typo (https://dev.mysql.com/doc/refman/8.0/en/join.html)
+// Underscore is not a typo https://dev.mysql.com/doc/refman/8.0/en/join.html
 			"straight_join" => $this->straightJoin(),
 			"left join" => $this->leftJoin(),
 			"left outer join" => $this->leftOuterJoin(),
