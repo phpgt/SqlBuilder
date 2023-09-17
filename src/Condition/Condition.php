@@ -17,47 +17,20 @@ class Condition {
 
 	public function getCondition(
 		string $subLogic = null,
-		string $separator = "\n\t"
+		string $separator = "\n\t",
 	):string {
 		$condition = "";
 		$brackets = false;
 
 		foreach($this->parts as $i => $part) {
-			if(strlen($condition) > 0) {
-				$condition .= $separator;
-			}
-
-			if($part instanceof Condition) {
-				$logic = $part->getLogic();
-
-				if(strlen($condition) > 0) {
-					$condition .= $logic;
-					$condition .= " ";
-				}
-				$condition .= $part->getCondition($logic);
-				$brackets = true;
-				continue;
-			}
-			elseif(is_string($part)) {
-				if($part[0] === "?") {
-					$part = substr($part, 1) . " = ?";
-				}
-				elseif($part[0] === ":") {
-					$part = substr($part, 1) . " = $part";
-				}
-			}
-
-			if($i > 0) {
-				if($subLogic) {
-					$condition .= $subLogic;
-				}
-				else {
-					$condition .= $this->getLogic();
-				}
-
-				$condition .= " ";
-			}
-			$condition .= $part;
+			$condition = $this->addPartToCondition(
+				$i,
+				$part,
+				$condition,
+				$separator,
+				$subLogic,
+			);
+			$brackets = $brackets || $part instanceof Condition;
 		}
 
 		if($brackets) {
@@ -65,6 +38,47 @@ class Condition {
 		}
 
 		return $condition;
+	}
+
+	private function addPartToCondition(
+		int $i,
+		string|Condition $part,
+		string $condition,
+		string $separator,
+		string $subLogic = null,
+	):string {
+		if(strlen($condition) > 0) {
+			$condition .= $separator;
+		}
+
+		if($part instanceof Condition) {
+			$logic = $part->getLogic();
+			if(strlen($condition) > 0) {
+				$condition .= "$logic ";
+			}
+			$condition .= $part->getCondition($logic);
+		}
+		else {
+			$part = $this->processStringPart($part);
+			if($i > 0) {
+				$subLogic = $subLogic ?: $this->getLogic();
+				$condition .= "$subLogic ";
+			}
+			$condition .= $part;
+		}
+
+		return $condition;
+	}
+
+	private function processStringPart(string $part):string {
+		if($part[0] === "?") {
+			$part = substr($part, 1) . " = ?";
+		}
+		elseif($part[0] === ":") {
+			$part = substr($part, 1) . " = $part";
+		}
+
+		return $part;
 	}
 
 	public function getShortParameterSyntax():?string {
@@ -75,7 +89,7 @@ class Condition {
 
 			$char1 = $part[0];
 			if($char1 === "?"
-			|| $char1 === ":") {
+				|| $char1 === ":") {
 				return $char1;
 			}
 		}

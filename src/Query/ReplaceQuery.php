@@ -57,7 +57,7 @@ abstract class ReplaceQuery extends SqlQuery {
 	protected function normaliseSet(array $setData):array {
 		$normalised = [];
 
-		if(is_array($setData[0])) {
+		if(isset($setData[0]) && is_array($setData[0])) {
 			$setData = $setData[0];
 		}
 

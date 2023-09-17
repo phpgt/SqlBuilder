@@ -6,6 +6,7 @@ use Gt\SqlBuilder\Condition\Condition;
 use Gt\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
 use Stringable;
 
+/** @SuppressWarnings(PHPMD.ExcessiveClassComplexity) */
 abstract class SqlQuery implements Stringable {
 	const PRE_QUERY_COMMENT = "/* preQuery */";
 	const POST_QUERY_COMMENT = "/* postQuery */";
@@ -29,7 +30,11 @@ abstract class SqlQuery implements Stringable {
 		return "";
 	}
 
-	/** @param array<string, string>|array<string, string[]|mixed> $clauses */
+	/**
+	 * @param array<string, string>|array<string, string[]|mixed> $clauses
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 * @phpcs:disable Generic.Metrics.CyclomaticComplexity
+	 */
 	protected function processClauseList(array $clauses):string {
 		$query = "";
 
@@ -59,33 +64,33 @@ abstract class SqlQuery implements Stringable {
 			elseif($name === "partition") {
 				$query .= $this->processPartitionClause($parts);
 			}
-			elseif(strstr($name, "rowSelect")) {
+			elseif(str_contains($name, "rowSelect")) {
 				if(isset($parts[0]) && $parts[0] instanceof SelectQuery) {
 					$query .= $parts[0];
 				}
 			}
-			elseif(strstr($name, "join")) {
+			elseif(str_contains($name, "join")) {
 				$query .= $this->processJoinClause(
 					$name,
 					$parts
 				);
 			}
-			elseif(strstr($name, "limit")) {
+			elseif(str_contains($name, "limit")) {
 				if(isset($parts[0])) {
 					$query .= "\nlimit $parts[0]";
 				}
 			}
-			elseif(strstr($name, "offset")) {
+			elseif(str_contains($name, "offset")) {
 				if(isset($parts[0])) {
 					$query .= "\noffset $parts[0]";
 				}
 			}
-			elseif(strstr($name, "create definition")) {
+			elseif(str_contains($name, "create definition")) {
 				$query .= "(";
 				$query .= implode(", \n", $parts);
 				$query .= ")";
 			}
-			elseif(strstr($name, "alter options")) {
+			elseif(str_contains($name, "alter options")) {
 				$query .= implode(", \n", $parts);
 			}
 			else {
