@@ -10,10 +10,10 @@ When a PHP application reaches scale, it is often the database that is the perfo
 <a href="https://github.com/PhpGt/SqlBuilder/actions" target="_blank">
 	<img src="https://badge.status.php.gt/sqlbuilder-build.svg" alt="Build status" />
 </a>
-<a href="https://scrutinizer-ci.com/g/PhpGt/SqlBuilder" target="_blank">
+<a href="https://app.codacy.com/gh/PhpGt/SqlBuilder" target="_blank">
 	<img src="https://badge.status.php.gt/sqlbuilder-quality.svg" alt="Code quality" />
 </a>
-<a href="https://scrutinizer-ci.com/g/PhpGt/SqlBuilder" target="_blank">
+<a href="https://app.codecov.io/gh/PhpGt/SqlBuilder" target="_blank">
 	<img src="https://badge.status.php.gt/sqlbuilder-coverage.svg" alt="Code coverage" />
 </a>
 <a href="https://packagist.org/packages/PhpGt/SqlBuilder" target="_blank">

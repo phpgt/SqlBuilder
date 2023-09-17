@@ -51,7 +51,7 @@ abstract class ReplaceQuery extends SqlQuery {
 	}
 
 	/**
-	 * @param array<int, string>|array<string, string> $setData
+	 * @param array<int, string>|array<string, string|string[]> $setData
 	 * @return string[]|SqlQuery[]
 	 */
 	protected function normaliseSet(array $setData):array {
