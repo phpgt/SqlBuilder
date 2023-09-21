@@ -2,6 +2,7 @@
 /** @noinspection SqlNoDataSourceInspection */
 namespace Gt\SqlBuilder\Test;
 
+use Error;
 use Gt\SqlBuilder\SelectBuilder;
 
 class SelectBuilderTest extends QueryTestCase {
@@ -196,5 +197,12 @@ class SelectBuilderTest extends QueryTestCase {
 			"select id, createdAt, email, max(loginDateTime) as lastLogin from user left join user_access on user.id = user_access.userId where email like '%@example.com' and deletedAt is null group by email having lastLogin > '2020-01-01' order by email limit 100",
 			self::normalise($sut)
 		);
+	}
+
+	public function test_invalidQueryParts():void {
+		$sut = new SelectBuilder();
+		self::expectException(Error::class);
+		self::expectExceptionMessage("Call to undefined method Gt\SqlBuilder\SelectBuilder::unknown()");
+		$sut->unknown("test");
 	}
 }
