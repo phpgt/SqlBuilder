@@ -16,7 +16,7 @@ class Condition {
 	}
 
 	public function getCondition(
-		string $subLogic = null,
+		?string $subLogic = null,
 		string $separator = "\n\t",
 	):string {
 		$condition = "";
@@ -45,7 +45,7 @@ class Condition {
 		string|Condition $part,
 		string $condition,
 		string $separator,
-		string $subLogic = null,
+		?string $subLogic = null,
 	):string {
 		if(strlen($condition) > 0) {
 			$condition .= $separator;
