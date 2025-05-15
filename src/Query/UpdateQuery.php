@@ -5,7 +5,7 @@ abstract class UpdateQuery extends SqlQuery {
 	public function __toString():string {
 		return $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
-			"update" => $this->update(),
+			"update" => $this->table(),
 			"set" => $this->normaliseSet($this->set()),
 			"where" => $this->where(),
 			"order by" => $this->orderBy(),
@@ -15,10 +15,14 @@ abstract class UpdateQuery extends SqlQuery {
 	}
 
 	/** @return string[]|SqlQuery[] */
-	abstract public function update():array;
+	public function table():array {
+		return $this->dynamicReturn(__FUNCTION__);
+	}
 
 	/** @return string[]|SqlQuery[] */
-	abstract public function set():array;
+	public function set():array {
+		return $this->dynamicReturn(__FUNCTION__);
+	}
 
 	/** @return array<int|string, int|string|SqlQuery> */
 	public function where():array {
