@@ -147,3 +147,9 @@ This library does not provide any SQL processing capabilities by design. Any dri
 [view]: https://en.wikipedia.org/wiki/View_(SQL)
 [stored-procedure]: https://en.wikipedia.org/wiki/Stored_procedure
 [fluent]: https://en.wikipedia.org/wiki/Fluent_interface
+
+# Proudly sponsored by
+
+[JetBrains Open Source sponsorship program](https://www.jetbrains.com/community/opensource/)
+
+[![JetBrains logo.](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)](https://www.jetbrains.com/community/opensource/)
