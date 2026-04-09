@@ -3,7 +3,7 @@
 	"description": "Object oriented representation of SQL queries.",
 
 	"require": {
-		"php": ">=8.0"
+		"php": ">=8.4"
 	},
 
 	"require-dev": {
@@ -24,6 +24,11 @@
 			"Gt\\SqlBuilder\\Test\\": "./test/phpunit"
 		}
 	},
+	"config": {
+		"platform": {
+			"php": "8.4.0"
+		}
+	},
 
 	"scripts": {
 		"phpunit": "vendor/bin/phpunit --configuration phpunit.xml",
@@ -42,7 +47,7 @@
 	"funding": [
 		{
 			"type": "github",
-			"url": "https://github.com/sponsors/PhpGt"
+			"url": "https://github.com/sponsors/phpgt"
 		}
 	]
 }
