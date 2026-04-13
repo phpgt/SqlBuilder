@@ -10,8 +10,6 @@ use Gt\SqlBuilder\Query\UpdateQuery;
  * @method UpdateBuilder set(string ...$args)
  * @method UpdateBuilder from(string ...$args)
  * @method UpdateBuilder where(string ...$args)
- * @method UpdateBuilder orderBy(string ...$args)
- * @method UpdateBuilder limit(int $limit)
  */
 class UpdateBuilder extends AbstractQueryBuilder {
 	const QUERY_PARTS = [
@@ -20,8 +18,6 @@ class UpdateBuilder extends AbstractQueryBuilder {
 		"set" => [],
 		"from" => [],
 		"where" => [],
-		"orderBy" => [],
-		"limit" => null,
 	];
 
 	protected function createQuery():UpdateQuery {

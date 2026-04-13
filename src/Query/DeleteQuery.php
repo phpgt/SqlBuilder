@@ -7,8 +7,6 @@ abstract class DeleteQuery extends SqlQuery {
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"delete from" => $this->from(),
 			"where" => $this->where(),
-			"order by" => $this->orderBy(),
-			"limit" => $this->limit(),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
 	}
@@ -20,15 +18,6 @@ abstract class DeleteQuery extends SqlQuery {
 
 	/** @return array<int|string, int|string|SqlQuery> */
 	public function where():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	/** @return string[]|SqlQuery[] */
-	public function orderBy():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	public function limit():?int {
 		return $this->dynamicReturn(__FUNCTION__);
 	}
 }

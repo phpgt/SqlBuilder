@@ -8,8 +8,6 @@ abstract class UpdateQuery extends SqlQuery {
 			"update" => $this->table(),
 			"set" => $this->normaliseSet($this->set()),
 			"where" => $this->where(),
-			"order by" => $this->orderBy(),
-			"limit" => $this->limit(),
 			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
 	}
@@ -26,15 +24,6 @@ abstract class UpdateQuery extends SqlQuery {
 
 	/** @return array<int|string, int|string|SqlQuery> */
 	public function where():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	/** @return string[]|SqlQuery[] */
-	public function orderBy():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	public function limit():?int {
 		return $this->dynamicReturn(__FUNCTION__);
 	}
 

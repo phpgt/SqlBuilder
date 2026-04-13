@@ -24,17 +24,6 @@ class UpdateBuilderTest extends QueryTestCase {
 		);
 	}
 
-	public function testLimit():void {
-		$sut = new UpdateBuilder();
-		$sut->table("TestTable")
-			->where("id = 123")
-			->limit(1);
-		self::assertSame(
-			"update TestTable where id = 123 limit 1",
-			self::normalise($sut),
-		);
-	}
-
 	public function testGetQuery():void {
 		$sut = new UpdateBuilder();
 		$sut->table("TestTable")

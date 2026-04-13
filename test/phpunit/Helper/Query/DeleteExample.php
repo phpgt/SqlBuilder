@@ -15,8 +15,4 @@ class DeleteExample extends DeleteQuery {
 			"id = :id",
 		];
 	}
-
-	public function limit():int {
-		return 1;
-	}
 }

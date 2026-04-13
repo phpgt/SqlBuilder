@@ -26,39 +26,6 @@ class DeleteBuilderTest extends QueryTestCase {
 		);
 	}
 
-	public function testOrderBy():void {
-		$sut = new DeleteBuilder();
-		$sut->from("TestTable")
-			->orderBy("exampleColumn");
-		/** @noinspection SqlWithoutWhere */
-		self::assertSame(
-			"delete from TestTable order by exampleColumn",
-			self::normalise($sut)
-		);
-	}
-
-	public function testLimit():void {
-		$sut = new DeleteBuilder();
-		$sut->from("TestTable")
-			->limit(1);
-		self::assertSame(
-			"delete from TestTable limit 1",
-			self::normalise($sut)
-		);
-	}
-
-	public function test_combination():void {
-		$sut = new DeleteBuilder();
-		$sut->from("TestTable", "AnotherExample")
-			->where("softDelete is not null", "actionAllowed = 5")
-			->orderBy("TestTable.createdAt")
-			->limit(10);
-		self::assertSame(
-			"delete from TestTable, AnotherExample where softDelete is not null and actionAllowed = 5 order by TestTable.createdAt limit 10",
-			self::normalise($sut)
-		);
-	}
-
 	public function testGetQuery():void {
 		$sut = new DeleteBuilder();
 		$sut->from("TestTable")
