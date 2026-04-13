@@ -58,9 +58,6 @@ abstract class SqlQuery implements Stringable {
 			elseif($name === "set") {
 				$query .= $this->processSetClause($parts);
 			}
-			elseif($name === "on duplicate key update") {
-				$query .= $this->processSetClause($parts, $name);
-			}
 			elseif($name === "partition") {
 				$query .= $this->processPartitionClause($parts);
 			}

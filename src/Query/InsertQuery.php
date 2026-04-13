@@ -21,15 +21,4 @@ abstract class InsertQuery extends ReplaceQuery {
 			self::POST_QUERY_COMMENT => $this->postQuery(),
 		]);
 	}
-
-	/**
-	 * Return an assignment list that matches the set() rules. It is often
-	 * useful to return a call to set() directly, as it is usual to list the
-	 * same assignments as part of the "on duplicate key update" section as
-	 * in the "set" section.
-	 * @return array<int|string, int|string>
-	 */
-	public function onDuplicate():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
 }
