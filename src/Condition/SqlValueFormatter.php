@@ -16,7 +16,7 @@ trait SqlValueFormatter {
 		}
 
 		if(is_bool($value)) {
-			return $value ? "1" : "0";
+			return $value ? "true" : "false";
 		}
 
 		if(is_int($value) || is_float($value)) {

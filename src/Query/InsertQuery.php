@@ -53,7 +53,7 @@ abstract class InsertQuery extends SqlQuery {
 	}
 
 	/**
-	 * @param array<int, string>|array<string, string|string[]> $setData
+	 * @param array<int, string>|array<string, string|int|bool|string[]> $setData
 	 * @return string[]|SqlQuery[]
 	 */
 	protected function normaliseSet(array $setData):array {
@@ -68,6 +68,9 @@ abstract class InsertQuery extends SqlQuery {
 				$normalised[$name] = ":$name";
 			}
 			else {
+				if(is_bool($name)) {
+					$name = $name ? "true" : "false";
+				}
 				$normalised[$i] = $name;
 			}
 		}

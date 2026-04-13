@@ -24,6 +24,19 @@ class UpdateBuilderTest extends QueryTestCase {
 		);
 	}
 
+	public function testSetBooleanValues():void {
+		$sut = new UpdateBuilder();
+		$sut->table("TestTable")
+			->set([
+				"enabled" => true,
+				"archived" => false,
+			]);
+		self::assertSame(
+			"update TestTable set enabled = true, archived = false",
+			self::normalise($sut),
+		);
+	}
+
 	public function testGetQuery():void {
 		$sut = new UpdateBuilder();
 		$sut->table("TestTable")

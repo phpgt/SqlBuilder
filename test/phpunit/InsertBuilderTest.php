@@ -32,6 +32,19 @@ class InsertBuilderTest extends QueryTestCase {
 		);
 	}
 
+	public function testSet_manualBoolean():void {
+		$sut = new InsertBuilder();
+		$sut->into("TestTable")
+			->set([
+				"enabled" => true,
+				"archived" => false,
+			]);
+		self::assertSame(
+			"insert into TestTable ( enabled, archived ) values ( true, false )",
+			self::normalise($sut)
+		);
+	}
+
 	public function testColumnsValues():void {
 		$sut = new InsertBuilder();
 		$sut->into("TestTable")

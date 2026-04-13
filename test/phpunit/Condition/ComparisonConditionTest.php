@@ -31,7 +31,7 @@ class ComparisonConditionTest extends TestCase {
 
 	public function testEqualsFormatsBooleans():void {
 		$sut = new Equals("enabled", true);
-		self::assertSame("enabled = 1", $sut->getCondition());
+		self::assertSame("enabled = true", $sut->getCondition());
 	}
 
 	public function testGreaterThan():void {
@@ -49,9 +49,9 @@ class ComparisonConditionTest extends TestCase {
 		self::assertSame("score < 10", $sut->getCondition());
 	}
 
-	public function testLessThanFormatsFalseAsZero():void {
+	public function testLessThanFormatsFalseAsKeyword():void {
 		$sut = new LessThan("isArchived", false);
-		self::assertSame("isArchived < 0", $sut->getCondition());
+		self::assertSame("isArchived < false", $sut->getCondition());
 	}
 
 	public function testBetweenScalars():void {
