@@ -7,12 +7,12 @@ namespace Gt\SqlBuilder\Test\Query;
 use Gt\SqlBuilder\Query\SelectQuery;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExample;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendComplex;
+use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendNewConditions;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhere;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleInnerJoin;
 use Gt\SqlBuilder\Test\Helper\Query\SelectExampleSubquery;
 use Gt\SqlBuilder\Test\QueryTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
 class SelectQueryTest extends QueryTestCase {
 	public function testDefaults() {
@@ -48,6 +48,12 @@ class SelectQueryTest extends QueryTestCase {
 		$sut = new SelectExampleExtendComplex();
 		$sql = self::normalise($sut);
 		self::assertEquals("select id, name, dateOfBirth, category, location from student where deletedAt is null and test = 123 and ( location = 105 or location is null )", $sql);
+	}
+
+	public function testSelectExampleExtendNewConditions() {
+		$sut = new SelectExampleExtendNewConditions();
+		$sql = self::normalise($sut);
+		self::assertEquals("select id, name, dateOfBirth from student where deletedAt is null and deletedAt is null and score > 50 and ( status = 'active' or createdAt between '2026-01-01 00:00:00' and '2026-12-31 23:59:59' )", $sql);
 	}
 
 	public function testSelectInnerJoin() {
