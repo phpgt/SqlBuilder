@@ -3,6 +3,7 @@
 namespace Gt\SqlBuilder\Test;
 
 use Gt\SqlBuilder\InsertBuilder;
+use Gt\SqlBuilder\Query\InsertQuery;
 
 class InsertBuilderTest extends QueryTestCase {
 	public function testSet_named():void {
@@ -40,5 +41,16 @@ class InsertBuilderTest extends QueryTestCase {
 			"insert into TestTable ( id, name ) values ( 123, 'example' )",
 			self::normalise($sut)
 		);
+	}
+
+	public function testGetQuery():void {
+		$sut = new InsertBuilder();
+		$sut->into("TestTable")
+			->columns("id")
+			->values(123);
+
+		$query = $sut->getQuery();
+		self::assertInstanceOf(InsertQuery::class, $query);
+		self::assertSame((string)$sut, (string)$query);
 	}
 }

@@ -4,6 +4,7 @@ namespace Gt\SqlBuilder;
 use Gt\SqlBuilder\Query\UpdateQuery;
 
 /**
+ * @extends AbstractQueryBuilder<UpdateQuery>
  * @method UpdateBuilder table(string ...$args)
  * @method UpdateBuilder join(string ...$args)
  * @method UpdateBuilder set(string ...$args)
@@ -23,9 +24,7 @@ class UpdateBuilder extends AbstractQueryBuilder {
 		"limit" => null,
 	];
 
-	public function __toString():string {
-		$class = new class() extends UpdateQuery {};
-		$class->setDynamicParts($this->parts);
-		return (string)$class;
+	protected function createQuery():UpdateQuery {
+		return new class() extends UpdateQuery {};
 	}
 }

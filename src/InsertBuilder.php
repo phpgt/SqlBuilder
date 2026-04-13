@@ -4,6 +4,7 @@ namespace Gt\SqlBuilder;
 use Gt\SqlBuilder\Query\InsertQuery;
 
 /**
+ * @extends AbstractQueryBuilder<InsertQuery>
  * TODO: It should be possible to use *insert* into xyz *select* abc
  * @method self into(string...$tables)
  * @method self partition(string...$partitions)
@@ -20,9 +21,7 @@ class InsertBuilder extends AbstractQueryBuilder {
 		"set" => [],
 	];
 
-	public function __toString():string {
-		$class = new class() extends InsertQuery {};
-		$class->setDynamicParts($this->parts);
-		return (string)$class;
+	protected function createQuery():InsertQuery {
+		return new class() extends InsertQuery {};
 	}
 }

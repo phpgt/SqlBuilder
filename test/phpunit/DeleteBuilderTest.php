@@ -3,6 +3,7 @@
 namespace Gt\SqlBuilder\Test;
 
 use Gt\SqlBuilder\DeleteBuilder;
+use Gt\SqlBuilder\Query\DeleteQuery;
 
 class DeleteBuilderTest extends QueryTestCase {
 	public function testFrom():void {
@@ -67,5 +68,15 @@ class DeleteBuilderTest extends QueryTestCase {
 			"delete from TestTable, AnotherExample where softDelete is not null and actionAllowed = 5 order by TestTable.createdAt limit 10",
 			self::normalise($sut)
 		);
+	}
+
+	public function testGetQuery():void {
+		$sut = new DeleteBuilder();
+		$sut->from("TestTable")
+			->where("softDelete is not null");
+
+		$query = $sut->getQuery();
+		self::assertInstanceOf(DeleteQuery::class, $query);
+		self::assertSame((string)$sut, (string)$query);
 	}
 }

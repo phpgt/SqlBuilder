@@ -2,8 +2,12 @@
 namespace Gt\SqlBuilder;
 
 use Error;
+use Gt\SqlBuilder\Query\SqlQuery;
 use Stringable;
 
+/**
+ * @template TQuery of SqlQuery
+ */
 abstract class AbstractQueryBuilder implements Stringable {
 	const QUERY_PARTS = [];
 
@@ -12,6 +16,19 @@ abstract class AbstractQueryBuilder implements Stringable {
 
 	public function __construct() {
 		$this->parts = static::QUERY_PARTS;
+	}
+
+	public function __toString():string {
+		return (string)$this->getQuery();
+	}
+
+	/**
+	 * @return TQuery
+	 */
+	public function getQuery():SqlQuery {
+		$query = $this->createQuery();
+		$query->setDynamicParts($this->parts);
+		return $query;
 	}
 
 	/**
@@ -33,4 +50,9 @@ abstract class AbstractQueryBuilder implements Stringable {
 
 		return $this;
 	}
+
+	/**
+	 * @return TQuery
+	 */
+	abstract protected function createQuery():SqlQuery;
 }

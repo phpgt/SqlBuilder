@@ -1,6 +1,7 @@
 <?php
 namespace Gt\SqlBuilder\Test;
 
+use Gt\SqlBuilder\Query\UpdateQuery;
 use Gt\SqlBuilder\UpdateBuilder;
 
 class UpdateBuilderTest extends QueryTestCase {
@@ -32,5 +33,15 @@ class UpdateBuilderTest extends QueryTestCase {
 			"update TestTable where id = 123 limit 1",
 			self::normalise($sut),
 		);
+	}
+
+	public function testGetQuery():void {
+		$sut = new UpdateBuilder();
+		$sut->table("TestTable")
+			->where("id = 123");
+
+		$query = $sut->getQuery();
+		self::assertInstanceOf(UpdateQuery::class, $query);
+		self::assertSame((string)$sut, (string)$query);
 	}
 }
