@@ -14,7 +14,7 @@ class InsertBuilderTest extends QueryTestCase {
 				"name",
 			);
 		self::assertSame(
-			"insert into TestTable set id = :id, name = :name",
+			"insert into TestTable ( id, name ) values ( :id, :name )",
 			self::normalise($sut)
 		);
 	}
@@ -27,7 +27,7 @@ class InsertBuilderTest extends QueryTestCase {
 				"name" => "'example'"
 			]);
 		self::assertSame(
-			"insert into TestTable set id = 123, name = 'example'",
+			"insert into TestTable ( id, name ) values ( 123, 'example' )",
 			self::normalise($sut)
 		);
 	}

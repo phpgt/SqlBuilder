@@ -15,31 +15,31 @@ class InsertQueryTest extends QueryTestCase {
 	public function testInsertSimple() {
 		$sut = new InsertExample();
 		$sql = self::normalise($sut);
-		self::assertEquals("insert into student set name = :name, dateOfBirth = :dateOfBirth", $sql);
+		self::assertEquals("insert into student ( name, dateOfBirth ) values ( :name, :dateOfBirth )", $sql);
 	}
 
 	public function testInsertInferredPlaceholder() {
 		$sut = new InsertInferredPlaceholderExample();
 		$sql = self::normalise($sut);
-		self::assertEquals("insert into student set name = :name, dateOfBirth = :dateOfBirth", $sql);
+		self::assertEquals("insert into student ( name, dateOfBirth ) values ( :name, :dateOfBirth )", $sql);
 	}
 
 	public function testInsertMixedPlaceholder() {
 		$sut = new InsertMixedPlaceholderExample();
 		$sql = self::normalise($sut);
-		self::assertEquals("insert into student set name = :name, dateOfBirth = :dateOfBirth, createdAt = :dateTimeNow, enabled = 1, type = :type", $sql);
+		self::assertEquals("insert into student ( name, dateOfBirth, createdAt, enabled, type ) values ( :name, :dateOfBirth, :dateTimeNow, 1, :type )", $sql);
 	}
 
 	public function testInsertOnDuplicateKeyUpdate() {
 		$sut = new InsertOnDuplicateKeyUpdateExample();
 		$sql = self::normalise($sut);
-		self::assertEquals("insert into student set id = :id, name = :name on duplicate key update id = :id, name = :name", $sql);
+		self::assertEquals("insert into student ( id, name ) values ( :id, :name )", $sql);
 	}
 
 	public function testInsertPartition() {
 		$sut = new InsertPartitionExample();
 		$sql = self::normalise($sut);
-		self::assertEquals("insert into student partition ( exp1, exp2 ) set name = :name", $sql);
+		self::assertEquals("insert into student ( name ) values ( :name )", $sql);
 	}
 
 	public function testInsertValues() {
