@@ -5,7 +5,7 @@ class UpdateExtendsExampleUnnormalisedSet extends UpdateExtendsExample {
 	public function set():array {
 		return [
 			...parent::set(),
-			"exampleNormalisation",
+			":exampleNormalisation",
 			"exampleColumn1" => ":exampleValue1",
 			"exampleColumn2" => ":exampleValue2"
 		];

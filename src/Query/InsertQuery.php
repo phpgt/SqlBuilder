@@ -40,8 +40,8 @@ abstract class InsertQuery extends SqlQuery {
 	/**
 	 * Return either an associative array where the keys are the column
 	 * names and the values are the assignment values, or an indexed array
-	 * where the values are the column names where the values will be
-	 * inferred as the column name prefixed with the colon character.
+	 * using explicit short syntax (`:name` / `?name`) or full assignment
+	 * expressions (`column = expression`).
 	 * @return array<int|string, int|string>
 	 */
 	public function set():array {
@@ -54,23 +54,9 @@ abstract class InsertQuery extends SqlQuery {
 
 	/**
 	 * @param array<int, string>|array<string, string|int|bool> $setData
-	 * @return string[]|SqlQuery[]
+	 * @return array<int|string, string>
 	 */
 	protected function normaliseSet(array $setData):array {
-		$normalised = [];
-
-		foreach($setData as $i => $name) {
-			if(is_int($i)) {
-				$normalised[$name] = ":$name";
-			}
-			else {
-				if(is_bool($name)) {
-					$name = $name ? "true" : "false";
-				}
-				$normalised[$i] = $name;
-			}
-		}
-
-		return $normalised;
+		return $this->normaliseSetData($setData);
 	}
 }

@@ -4,19 +4,30 @@ namespace Gt\SqlBuilder\Test;
 
 use Gt\SqlBuilder\InsertBuilder;
 use Gt\SqlBuilder\Query\InsertQuery;
+use Gt\SqlBuilder\SqlBuilderException;
 
 class InsertBuilderTest extends QueryTestCase {
-	public function testSet_named():void {
+	public function testSet_shortNamed():void {
 		$sut = new InsertBuilder();
 		$sut->into("TestTable")
 			->set(
-				"id",
-				"name",
+				":id",
+				":name",
 			);
 		self::assertSame(
 			"insert into TestTable ( id, name ) values ( :id, :name )",
 			self::normalise($sut)
 		);
+	}
+
+	public function testSet_rejectsImplicitNamed():void {
+		$sut = new InsertBuilder();
+		$sut->into("TestTable")
+			->set("id");
+
+		$this->expectException(SqlBuilderException::class);
+		$this->expectExceptionMessage("Indexed set() values must use explicit short syntax");
+		self::normalise($sut);
 	}
 
 	public function testSet_manual():void {
@@ -41,6 +52,19 @@ class InsertBuilderTest extends QueryTestCase {
 			]);
 		self::assertSame(
 			"insert into TestTable ( enabled, archived ) values ( true, false )",
+			self::normalise($sut)
+		);
+	}
+
+	public function testSet_explicitAssignment():void {
+		$sut = new InsertBuilder();
+		$sut->into("TestTable")
+			->set(
+				"id = uuid()",
+				"name = trim(:name)",
+			);
+		self::assertSame(
+			"insert into TestTable ( id, name ) values ( uuid(), trim(:name) )",
 			self::normalise($sut)
 		);
 	}

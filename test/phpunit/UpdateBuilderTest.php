@@ -2,6 +2,7 @@
 namespace Gt\SqlBuilder\Test;
 
 use Gt\SqlBuilder\Query\UpdateQuery;
+use Gt\SqlBuilder\SqlBuilderException;
 use Gt\SqlBuilder\UpdateBuilder;
 
 class UpdateBuilderTest extends QueryTestCase {
@@ -20,6 +21,36 @@ class UpdateBuilderTest extends QueryTestCase {
 			->where("id = 123");
 		self::assertSame(
 			"update TestTable where id = 123",
+			self::normalise($sut),
+		);
+	}
+
+	public function testSet_shortNamed():void {
+		$sut = new UpdateBuilder();
+		$sut->table("TestTable")
+			->set(":title");
+		self::assertSame(
+			"update TestTable set title = :title",
+			self::normalise($sut),
+		);
+	}
+
+	public function testSet_rejectsImplicitNamed():void {
+		$sut = new UpdateBuilder();
+		$sut->table("TestTable")
+			->set("title");
+
+		$this->expectException(SqlBuilderException::class);
+		$this->expectExceptionMessage("Indexed set() values must use explicit short syntax");
+		self::normalise($sut);
+	}
+
+	public function testSet_explicitAssignmentString():void {
+		$sut = new UpdateBuilder();
+		$sut->table("TestTable")
+			->set("title = trim(:title)");
+		self::assertSame(
+			"update TestTable set title = trim(:title)",
 			self::normalise($sut),
 		);
 	}

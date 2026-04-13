@@ -12,11 +12,11 @@ class InsertMixedPlaceholderExample extends InsertQuery {
 
 	public function set():array {
 		return [
-			"name",
-			"dateOfBirth",
+			":name",
+			":dateOfBirth",
 			"createdAt" => ":dateTimeNow",
 			"enabled" => 1,
-			"type",
+			":type",
 		];
 	}
 }
