@@ -70,28 +70,6 @@ class SelectBuilderTest extends QueryTestCase {
 		);
 	}
 
-	public function testRightJoin():void {
-		$sut = new SelectBuilder();
-		$sut->select("testColumn")
-			->from("TestTable")
-			->rightJoin("OtherTable on TestTable.id = OtherTable.id");
-		self::assertSame(
-			"select testColumn from TestTable right join OtherTable on TestTable.id = OtherTable.id",
-			self::normalise($sut)
-		);
-	}
-
-	public function testRightOuterJoin():void {
-		$sut = new SelectBuilder();
-		$sut->select("testColumn")
-			->from("TestTable")
-			->rightOuterJoin("OtherTable on TestTable.id = OtherTable.id");
-		self::assertSame(
-			"select testColumn from TestTable right outer join OtherTable on TestTable.id = OtherTable.id",
-			self::normalise($sut)
-		);
-	}
-
 	public function testWhere_stringCondition():void {
 		$sut = new SelectBuilder();
 		$sut->select("testColumn")

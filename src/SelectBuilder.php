@@ -11,9 +11,6 @@ use Gt\SqlBuilder\Query\SelectQuery;
  * @method self crossJoin(string...$args)
  * @method self leftJoin(string...$args)
  * @method self leftOuterJoin(string...$args)
- * @method self rightJoin(string...$args)
- * @method self rightOuterJoin(string...$args)
- * @method self straightJoin(string...$args)
  * @method self where(string...$args)
  * @method self groupBy(string...$args)
  * @method self having(string...$args)
@@ -29,9 +26,6 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"crossJoin" => [],
 		"leftJoin" => [],
 		"leftOuterJoin" => [],
-		"rightJoin" => [],
-		"rightOuterJoin" => [],
-		"straightJoin" => [],
 		"where" => [],
 		"groupBy" => [],
 		"having" => [],
