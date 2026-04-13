@@ -5,6 +5,7 @@ use Gt\SqlBuilder\Condition\Condition;
 use Gt\SqlBuilder\Query\DeleteQuery;
 
 /**
+ * @extends AbstractQueryBuilder<DeleteQuery>
  * @method self from(string...$tables)
  * @method self partition(string...$partitions)
  * @method self where(string|Condition...$conditions)
@@ -20,9 +21,7 @@ class DeleteBuilder extends AbstractQueryBuilder {
 		"limit" => null,
 	];
 
-	public function __toString():string {
-		$class = new class() extends DeleteQuery {};
-		$class->setDynamicParts($this->parts);
-		return (string)$class;
+	protected function createQuery():DeleteQuery {
+		return new class() extends DeleteQuery {};
 	}
 }

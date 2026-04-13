@@ -4,6 +4,7 @@ namespace Gt\SqlBuilder;
 use Gt\SqlBuilder\Query\SelectQuery;
 
 /**
+ * @extends AbstractQueryBuilder<SelectQuery>
  * @method self select(string...$args)
  * @method self from(string...$args)
  * @method self innerJoin(string...$args)
@@ -39,11 +40,7 @@ class SelectBuilder extends AbstractQueryBuilder {
 		"offset" => null,
 	];
 
-	// NOTE: This doesn't need to do any lazy loading. That's the job of the
-	// database to decide what query to build.
-	public function __toString():string {
-		$class = new class() extends SelectQuery {};
-		$class->setDynamicParts($this->parts);
-		return (string)$class;
+	protected function createQuery():SelectQuery {
+		return new class() extends SelectQuery {};
 	}
 }

@@ -3,6 +3,7 @@
 namespace Gt\SqlBuilder\Test;
 
 use Error;
+use Gt\SqlBuilder\Query\SelectQuery;
 use Gt\SqlBuilder\SelectBuilder;
 
 class SelectBuilderTest extends QueryTestCase {
@@ -204,5 +205,15 @@ class SelectBuilderTest extends QueryTestCase {
 		self::expectException(Error::class);
 		self::expectExceptionMessage("Call to undefined method Gt\SqlBuilder\SelectBuilder::unknown()");
 		$sut->unknown("test");
+	}
+
+	public function testGetQuery():void {
+		$sut = new SelectBuilder();
+		$sut->select("testColumn")
+			->from("TestTable");
+
+		$query = $sut->getQuery();
+		self::assertInstanceOf(SelectQuery::class, $query);
+		self::assertSame((string)$sut, (string)$query);
 	}
 }
