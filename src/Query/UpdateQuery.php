@@ -34,10 +34,6 @@ abstract class UpdateQuery extends SqlQuery {
 	protected function normaliseSet(array $setData):array {
 		$normalised = [];
 
-		if(isset($setData[0]) && is_array($setData[0])) {
-			$setData = $setData[0];
-		}
-
 		foreach($setData as $i => $name) {
 			if(is_int($i)) {
 				$normalised[$name] = ":$name";

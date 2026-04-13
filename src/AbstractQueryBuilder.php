@@ -11,7 +11,7 @@ use Stringable;
 abstract class AbstractQueryBuilder implements Stringable {
 	const QUERY_PARTS = [];
 
-	/** @var array<string, array<string>> */
+	/** @var array<string, array<mixed>|int|null> */
 	protected array $parts;
 
 	public function __construct() {
@@ -33,7 +33,7 @@ abstract class AbstractQueryBuilder implements Stringable {
 
 	/**
 	 * @param string $name
-	 * @param array<string> $arguments
+	 * @param array<mixed> $arguments
 	 */
 	public function __call(string $name, array $arguments):static {
 		if(!array_key_exists($name, static::QUERY_PARTS)) {
@@ -42,6 +42,13 @@ abstract class AbstractQueryBuilder implements Stringable {
 		}
 
 		if($name === "limit" || $name === "offset") {
+			$this->parts[$name] = $arguments[0];
+		}
+		elseif($name === "set"
+			&& count($arguments) === 1
+			&& is_array($arguments[0])) {
+			// Keep assignment lists flat so query classes receive the same shape
+			// from builders as they do from handwritten query subclasses.
 			$this->parts[$name] = $arguments[0];
 		}
 		else {

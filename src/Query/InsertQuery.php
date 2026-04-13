@@ -53,15 +53,11 @@ abstract class InsertQuery extends SqlQuery {
 	}
 
 	/**
-	 * @param array<int, string>|array<string, string|int|bool|string[]> $setData
+	 * @param array<int, string>|array<string, string|int|bool> $setData
 	 * @return string[]|SqlQuery[]
 	 */
 	protected function normaliseSet(array $setData):array {
 		$normalised = [];
-
-		if(isset($setData[0]) && is_array($setData[0])) {
-			$setData = $setData[0];
-		}
 
 		foreach($setData as $i => $name) {
 			if(is_int($i)) {
