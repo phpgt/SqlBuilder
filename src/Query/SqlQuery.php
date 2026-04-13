@@ -58,9 +58,6 @@ abstract class SqlQuery implements Stringable {
 			elseif($name === "set") {
 				$query .= $this->processSetClause($parts);
 			}
-			elseif($name === "partition") {
-				$query .= $this->processPartitionClause($parts);
-			}
 			elseif(str_contains($name, "rowSelect")) {
 				if(isset($parts[0]) && $parts[0] instanceof SelectQuery) {
 					$query .= $parts[0];
@@ -222,19 +219,6 @@ abstract class SqlQuery implements Stringable {
 		}
 
 		return $query . PHP_EOL;
-	}
-
-	/** @param string[] $parts */
-	private function processPartitionClause(array $parts):string {
-		if(empty($parts)) {
-			return "";
-		}
-
-		return "partition ( "
-			. PHP_EOL
-			. implode(", " . PHP_EOL, $parts)
-			. " )"
-			. PHP_EOL;
 	}
 
 	/** @return array<int|string, int|string|SqlQuery>|int|SelectQuery|null */

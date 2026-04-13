@@ -5,7 +5,6 @@ namespace Gt\SqlBuilder\Test\Query;
 use Gt\SqlBuilder\Test\Helper\Query\InsertExample;
 use Gt\SqlBuilder\Test\Helper\Query\InsertInferredPlaceholderExample;
 use Gt\SqlBuilder\Test\Helper\Query\InsertMixedPlaceholderExample;
-use Gt\SqlBuilder\Test\Helper\Query\InsertPartitionExample;
 use Gt\SqlBuilder\Test\Helper\Query\InsertSelectInlineExample;
 use Gt\SqlBuilder\Test\Helper\Query\InsertValuesExample;
 use Gt\SqlBuilder\Test\QueryTestCase;
@@ -27,12 +26,6 @@ class InsertQueryTest extends QueryTestCase {
 		$sut = new InsertMixedPlaceholderExample();
 		$sql = self::normalise($sut);
 		self::assertEquals("insert into student ( name, dateOfBirth, createdAt, enabled, type ) values ( :name, :dateOfBirth, :dateTimeNow, 1, :type )", $sql);
-	}
-
-	public function testInsertPartition() {
-		$sut = new InsertPartitionExample();
-		$sql = self::normalise($sut);
-		self::assertEquals("insert into student ( name ) values ( :name )", $sql);
 	}
 
 	public function testInsertValues() {

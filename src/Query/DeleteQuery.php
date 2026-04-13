@@ -6,7 +6,6 @@ abstract class DeleteQuery extends SqlQuery {
 		return $this->processClauseList([
 			self::PRE_QUERY_COMMENT => $this->preQuery(),
 			"delete from" => $this->from(),
-			"partition" => $this->partition(),
 			"where" => $this->where(),
 			"order by" => $this->orderBy(),
 			"limit" => $this->limit(),
@@ -16,11 +15,6 @@ abstract class DeleteQuery extends SqlQuery {
 
 	/** @return string[]|SqlQuery[] */
 	public function from():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	/** @return string[]|SqlQuery[] */
-	public function partition():array {
 		return $this->dynamicReturn(__FUNCTION__);
 	}
 

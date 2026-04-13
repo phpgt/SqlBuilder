@@ -7,7 +7,6 @@ use Gt\SqlBuilder\Query\DeleteQuery;
 /**
  * @extends AbstractQueryBuilder<DeleteQuery>
  * @method self from(string...$tables)
- * @method self partition(string...$partitions)
  * @method self where(string|Condition...$conditions)
  * @method self orderBy(string...$orderBy)
  * @method self limit(int $limit)
@@ -15,7 +14,6 @@ use Gt\SqlBuilder\Query\DeleteQuery;
 class DeleteBuilder extends AbstractQueryBuilder {
 	const QUERY_PARTS = [
 		"from" => [],
-		"partition" => [],
 		"where" => [],
 		"orderBy" => [],
 		"limit" => null,

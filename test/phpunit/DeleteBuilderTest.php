@@ -16,17 +16,6 @@ class DeleteBuilderTest extends QueryTestCase {
 		);
 	}
 
-	public function testPartition():void {
-		$sut = new DeleteBuilder();
-		$sut->from("TestTable")
-			->partition("AnotherExample");
-		/** @noinspection SqlWithoutWhere */
-		self::assertSame(
-			"delete from TestTable partition ( AnotherExample )",
-			self::normalise($sut)
-		);
-	}
-
 	public function testWhere():void {
 		$sut = new DeleteBuilder();
 		$sut->from("TestTable")
