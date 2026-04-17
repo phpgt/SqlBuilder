@@ -4,6 +4,7 @@ namespace Gt\SqlBuilder\Query;
 use Gt\SqlBuilder\Condition\AndCondition;
 use Gt\SqlBuilder\Condition\Condition;
 use Gt\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
+use Gt\SqlBuilder\SqlBuilderException;
 use Stringable;
 
 /** @SuppressWarnings(PHPMD.ExcessiveClassComplexity) */
@@ -57,12 +58,6 @@ abstract class SqlQuery implements Stringable {
 			}
 			elseif($name === "set") {
 				$query .= $this->processSetClause($parts);
-			}
-			elseif($name === "on duplicate key update") {
-				$query .= $this->processSetClause($parts, $name);
-			}
-			elseif($name === "partition") {
-				$query .= $this->processPartitionClause($parts);
 			}
 			elseif(str_contains($name, "rowSelect")) {
 				if(isset($parts[0]) && $parts[0] instanceof SelectQuery) {
@@ -206,7 +201,7 @@ abstract class SqlQuery implements Stringable {
 		return $query;
 	}
 
-	/** @param string[] $parts */
+	/** @param array<int|string, string> $parts */
 	private function processSetClause(
 		array $parts,
 		string $prefix = "set"
@@ -221,23 +216,70 @@ abstract class SqlQuery implements Stringable {
 				$query .= ", " . PHP_EOL;
 			}
 
-			$query .= "$key = $value";
+			if(is_int($key)) {
+				$query .= $value;
+			}
+			else {
+				$query .= "$key = $value";
+			}
 		}
 
 		return $query . PHP_EOL;
 	}
 
-	/** @param string[] $parts */
-	private function processPartitionClause(array $parts):string {
-		if(empty($parts)) {
-			return "";
+	/**
+	 * @param array<int, string>|array<string, string|int|bool> $setData
+	 * @return array<int|string, string>
+	 */
+	protected function normaliseSetData(array $setData):array {
+		$normalised = [];
+
+		foreach($setData as $i => $value) {
+			if(is_int($i)) {
+				$normalised = [
+					...$normalised,
+					...$this->normaliseIndexedSetValue($value),
+				];
+				continue;
+			}
+
+			$normalised[$i] = $this->formatAssignmentValue($value);
 		}
 
-		return "partition ( "
-			. PHP_EOL
-			. implode(", " . PHP_EOL, $parts)
-			. " )"
-			. PHP_EOL;
+		return $normalised;
+	}
+
+	/** @return array<int|string, string> */
+	private function normaliseIndexedSetValue(string $value):array {
+		$char1 = $value[0] ?? "";
+		if($char1 === ":") {
+			$column = substr($value, 1);
+			return [$column => $value];
+		}
+
+		if($char1 === "?") {
+			$column = substr($value, 1);
+			return [$column => "?"];
+		}
+
+		if(preg_match('/^\s*(.+?)\s*=\s*(.+)\s*$/', $value, $matches)) {
+			return [
+				trim($matches[1]) => trim($matches[2]),
+			];
+		}
+
+		throw new SqlBuilderException(
+			"Indexed set() values must use explicit short syntax (:name or ?name) "
+			. "or provide a full assignment expression"
+		);
+	}
+
+	protected function formatAssignmentValue(string|int|bool $value):string {
+		if(is_bool($value)) {
+			return $value ? "true" : "false";
+		}
+
+		return (string)$value;
 	}
 
 	/** @return array<int|string, int|string|SqlQuery>|int|SelectQuery|null */

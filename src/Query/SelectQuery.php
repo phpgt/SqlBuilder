@@ -14,12 +14,8 @@ abstract class SelectQuery extends SqlQuery {
 			"from" => $this->from(),
 			"inner join" => $this->innerJoin(),
 			"cross join" => $this->crossJoin(),
-// Underscore is not a typo https://dev.mysql.com/doc/refman/8.0/en/join.html
-			"straight_join" => $this->straightJoin(),
 			"left join" => $this->leftJoin(),
 			"left outer join" => $this->leftOuterJoin(),
-			"right join" => $this->rightJoin(),
-			"right outer join" => $this->rightOuterJoin(),
 			"where" => $this->where(),
 			"group by" => $this->groupBy(),
 			"having" => $this->having(),
@@ -57,27 +53,12 @@ abstract class SelectQuery extends SqlQuery {
 	}
 
 	/** @return string[] Zero or more `join_specification` */
-	public function straightJoin():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	/** @return string[] Zero or more `join_specification` */
 	public function leftJoin():array {
 		return $this->dynamicReturn(__FUNCTION__);
 	}
 
 	/** @return string[] Zero or more `join_specification` */
 	public function leftOuterJoin():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	/** @return string[] Zero or more `join_specification` */
-	public function rightJoin():array {
-		return $this->dynamicReturn(__FUNCTION__);
-	}
-
-	/** @return string[] Zero or more `join_specification` */
-	public function rightOuterJoin():array {
 		return $this->dynamicReturn(__FUNCTION__);
 	}
 

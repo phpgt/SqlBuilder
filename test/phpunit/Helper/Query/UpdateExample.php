@@ -12,7 +12,7 @@ class UpdateExample extends UpdateQuery {
 
 	public function set():array {
 		return [
-			"processedAt",
+			":processedAt",
 		];
 	}
 }

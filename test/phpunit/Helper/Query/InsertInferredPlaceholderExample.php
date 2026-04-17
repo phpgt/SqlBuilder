@@ -12,8 +12,8 @@ class InsertInferredPlaceholderExample extends InsertQuery {
 
 	public function set():array {
 		return [
-			"name",
-			"dateOfBirth",
+			":name",
+			":dateOfBirth",
 		];
 	}
 }

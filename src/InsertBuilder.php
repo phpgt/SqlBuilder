@@ -7,7 +7,6 @@ use Gt\SqlBuilder\Query\InsertQuery;
  * @extends AbstractQueryBuilder<InsertQuery>
  * TODO: It should be possible to use *insert* into xyz *select* abc
  * @method self into(string...$tables)
- * @method self partition(string...$partitions)
  * @method self columns(string...$columns)
  * @method self values(mixed...$values)
  * @method self set(array|string...$assignments)
@@ -15,7 +14,6 @@ use Gt\SqlBuilder\Query\InsertQuery;
 class InsertBuilder extends AbstractQueryBuilder {
 	const QUERY_PARTS = [
 		"into" => [],
-		"partition" => [],
 		"columns" => [],
 		"values" => [],
 		"set" => [],
