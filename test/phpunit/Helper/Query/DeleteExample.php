@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query;
+namespace GT\SqlBuilder\Test\Helper\Query;
 
-use Gt\SqlBuilder\Query\DeleteQuery;
+use GT\SqlBuilder\Query\DeleteQuery;
 
 class DeleteExample extends DeleteQuery {
 	public function from():array {

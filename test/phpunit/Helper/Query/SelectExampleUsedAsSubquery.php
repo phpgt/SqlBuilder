@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query;
+namespace GT\SqlBuilder\Test\Helper\Query;
 
-use Gt\SqlBuilder\Query\SelectQuery;
+use GT\SqlBuilder\Query\SelectQuery;
 
 class SelectExampleUsedAsSubquery extends SelectQuery {
 	public function select():array {

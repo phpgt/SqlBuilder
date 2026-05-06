@@ -20,7 +20,7 @@ When a PHP application reaches scale, it is often the database that is the perfo
 	<img src="https://badge.status.php.gt/sqlbuilder-version.svg" alt="Current version" />
 </a>
 <a href="http://www.php.gt/sqlbuilder" target="_blank">
-	<img src="https://badge.status.php.gt/sqlbuilder-docs.svg" alt="PHP.Gt/SqlBuilder documentation" />
+	<img src="https://badge.status.php.gt/sqlbuilder-docs.svg" alt="PHP.GT/SqlBuilder documentation" />
 </a>
 
 Example usage: a class that represents a SELECT query
@@ -43,6 +43,8 @@ The above query will return a list of all students. The problem here is that whe
 Instead, the following class can be used to _represent_ the above query:
 
 ```php
+use GT\SqlBuilder\Query\SelectQuery;
+
 class StudentSelect extends SelectQuery {
 	public function select():array {
 		return [
@@ -83,6 +85,8 @@ As you can see in the example above, `SqlQuery` functions always return an array
 To create the same query as in the example above with fluent syntax:
 
 ```php
+use GT\SqlBuilder\SelectBuilder;
+
 $selectQuery = new SelectBuilder(
 	"id",
 	"forename",
@@ -98,6 +102,8 @@ $selectQuery = new SelectBuilder(
 This is particularly useful for when there is a base query, say `StudentSelect`, and your code only requires a single additional condition. Rather than having to create a separate class for this single usage, it can be called inline:
 
 ```php
+use GT\SqlBuilder\SelectBuilder;
+
 // Start by using a base StudentSelect, then add a single inline condition to it.
 $studentSelect = new StudentSelect();
 
@@ -116,6 +122,8 @@ Expressions within `where` and `having` clauses can be connected with logical op
 For example, to select students with a specific age _and_ gender:
 
 ```php
+use GT\SqlBuilder\Condition\AndCondition;
+
 class StudentSelectByAge extends StudentSelect {
 	public function where():array {
 		return [

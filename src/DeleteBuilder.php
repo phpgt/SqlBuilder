@@ -1,8 +1,8 @@
 <?php
-namespace Gt\SqlBuilder;
+namespace GT\SqlBuilder;
 
-use Gt\SqlBuilder\Condition\Condition;
-use Gt\SqlBuilder\Query\DeleteQuery;
+use GT\SqlBuilder\Condition\Condition;
+use GT\SqlBuilder\Query\DeleteQuery;
 
 /**
  * @extends AbstractQueryBuilder<DeleteQuery>

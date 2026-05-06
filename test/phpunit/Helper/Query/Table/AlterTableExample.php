@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query\Table;
+namespace GT\SqlBuilder\Test\Helper\Query\Table;
 
-use Gt\SqlBuilder\Query\Table\AlterTableQuery;
+use GT\SqlBuilder\Query\Table\AlterTableQuery;
 
 class AlterTableExample extends AlterTableQuery {
 	public function alterTable():string {

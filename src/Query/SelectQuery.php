@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder\Query;
+namespace GT\SqlBuilder\Query;
 
 /** @SuppressWarnings(PHPMD.TooManyPublicMethods) */
 abstract class SelectQuery extends SqlQuery {

@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query\Table;
+namespace GT\SqlBuilder\Test\Helper\Query\Table;
 
-use Gt\SqlBuilder\Query\Table\DropTableQuery;
+use GT\SqlBuilder\Query\Table\DropTableQuery;
 
 class DropTableExample extends DropTableQuery {
 	public function dropTable():string {

@@ -1,9 +1,9 @@
 <?php
-namespace Gt\SqlBuilder\Test;
+namespace GT\SqlBuilder\Test;
 
-use Gt\SqlBuilder\Query\UpdateQuery;
-use Gt\SqlBuilder\SqlBuilderException;
-use Gt\SqlBuilder\UpdateBuilder;
+use GT\SqlBuilder\Query\UpdateQuery;
+use GT\SqlBuilder\SqlBuilderException;
+use GT\SqlBuilder\UpdateBuilder;
 
 class UpdateBuilderTest extends QueryTestCase {
 	public function testTable():void {

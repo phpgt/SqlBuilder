@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder;
+namespace GT\SqlBuilder;
 
 use RuntimeException;
 

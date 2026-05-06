@@ -1,8 +1,8 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query;
+namespace GT\SqlBuilder\Test\Helper\Query;
 
-use Gt\SqlBuilder\Query\InsertQuery;
-use Gt\SqlBuilder\Query\SelectQuery;
+use GT\SqlBuilder\Query\InsertQuery;
+use GT\SqlBuilder\Query\SelectQuery;
 
 class InsertSelectInlineExample extends InsertQuery {
 	public function into():array {

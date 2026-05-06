@@ -1,10 +1,10 @@
 <?php
-namespace Gt\SqlBuilder\Test\Query\Table;
+namespace GT\SqlBuilder\Test\Query\Table;
 
-use Gt\SqlBuilder\Query\SqlQuery;
-use Gt\SqlBuilder\SqlBuilderException;
-use Gt\SqlBuilder\Test\Helper\Query\Table\CreateTableExample;
-use Gt\SqlBuilder\Test\QueryTestCase;
+use GT\SqlBuilder\Query\SqlQuery;
+use GT\SqlBuilder\SqlBuilderException;
+use GT\SqlBuilder\Test\Helper\Query\Table\CreateTableExample;
+use GT\SqlBuilder\Test\QueryTestCase;
 
 class CreateTableQueryTest extends QueryTestCase {
 	public function testCreateTableSimple():void {

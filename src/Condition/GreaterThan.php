@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder\Condition;
+namespace GT\SqlBuilder\Condition;
 
 use DateTimeInterface;
 

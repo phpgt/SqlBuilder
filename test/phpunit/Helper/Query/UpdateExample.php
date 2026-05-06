@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query;
+namespace GT\SqlBuilder\Test\Helper\Query;
 
-use Gt\SqlBuilder\Query\UpdateQuery;
+use GT\SqlBuilder\Query\UpdateQuery;
 
 class UpdateExample extends UpdateQuery {
 	public function table():array {

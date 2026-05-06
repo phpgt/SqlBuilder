@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query;
+namespace GT\SqlBuilder\Test\Helper\Query;
 
 class SelectExampleSubquery extends SelectExample {
 	public function where():array {

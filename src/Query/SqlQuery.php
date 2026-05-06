@@ -1,10 +1,10 @@
 <?php
-namespace Gt\SqlBuilder\Query;
+namespace GT\SqlBuilder\Query;
 
-use Gt\SqlBuilder\Condition\AndCondition;
-use Gt\SqlBuilder\Condition\Condition;
-use Gt\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
-use Gt\SqlBuilder\SqlBuilderException;
+use GT\SqlBuilder\Condition\AndCondition;
+use GT\SqlBuilder\Condition\Condition;
+use GT\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
+use GT\SqlBuilder\SqlBuilderException;
 use Stringable;
 
 /** @SuppressWarnings(PHPMD.ExcessiveClassComplexity) */

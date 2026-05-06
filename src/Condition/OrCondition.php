@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder\Condition;
+namespace GT\SqlBuilder\Condition;
 
 class OrCondition extends Condition {
 	protected string $logic = "or";

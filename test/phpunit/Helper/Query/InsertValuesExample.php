@@ -1,8 +1,8 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query;
+namespace GT\SqlBuilder\Test\Helper\Query;
 
-use Gt\SqlBuilder\Query\InsertQuery;
-use Gt\SqlBuilder\Query\SqlQuery;
+use GT\SqlBuilder\Query\InsertQuery;
+use GT\SqlBuilder\Query\SqlQuery;
 
 class InsertValuesExample extends InsertQuery {
 	/** @return string[]|SqlQuery[] */

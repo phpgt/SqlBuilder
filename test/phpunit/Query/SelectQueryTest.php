@@ -2,16 +2,16 @@
 /** @noinspection SqlNoDataSourceInspection */
 /** @noinspection SqlResolveInspection TODO: This is not working :( */
 
-namespace Gt\SqlBuilder\Test\Query;
+namespace GT\SqlBuilder\Test\Query;
 
-use Gt\SqlBuilder\Query\SelectQuery;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExample;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendComplex;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendNewConditions;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhere;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExampleInnerJoin;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExampleSubquery;
-use Gt\SqlBuilder\Test\QueryTestCase;
+use GT\SqlBuilder\Query\SelectQuery;
+use GT\SqlBuilder\Test\Helper\Query\SelectExample;
+use GT\SqlBuilder\Test\Helper\Query\SelectExampleExtendComplex;
+use GT\SqlBuilder\Test\Helper\Query\SelectExampleExtendNewConditions;
+use GT\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhere;
+use GT\SqlBuilder\Test\Helper\Query\SelectExampleInnerJoin;
+use GT\SqlBuilder\Test\Helper\Query\SelectExampleSubquery;
+use GT\SqlBuilder\Test\QueryTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class SelectQueryTest extends QueryTestCase {

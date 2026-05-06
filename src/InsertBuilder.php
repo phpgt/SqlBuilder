@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder;
+namespace GT\SqlBuilder;
 
-use Gt\SqlBuilder\Query\InsertQuery;
+use GT\SqlBuilder\Query\InsertQuery;
 
 /**
  * @extends AbstractQueryBuilder<InsertQuery>

@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query;
+namespace GT\SqlBuilder\Test\Helper\Query;
 
 class SelectExampleExtendWhereNamedParameters extends SelectExample {
 	public function where():array {

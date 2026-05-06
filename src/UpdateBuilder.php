@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder;
+namespace GT\SqlBuilder;
 
-use Gt\SqlBuilder\Query\UpdateQuery;
+use GT\SqlBuilder\Query\UpdateQuery;
 
 /**
  * @extends AbstractQueryBuilder<UpdateQuery>

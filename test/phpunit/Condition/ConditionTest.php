@@ -1,9 +1,9 @@
 <?php
-namespace Gt\SqlBuilder\Test\Condition;
+namespace GT\SqlBuilder\Test\Condition;
 
-use Gt\SqlBuilder\Condition\AndCondition;
-use Gt\SqlBuilder\Condition\Condition;
-use Gt\SqlBuilder\Condition\OrCondition;
+use GT\SqlBuilder\Condition\AndCondition;
+use GT\SqlBuilder\Condition\Condition;
+use GT\SqlBuilder\Condition\OrCondition;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

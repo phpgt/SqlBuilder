@@ -15,13 +15,14 @@
 
 	"autoload": {
 		"psr-4": {
+			"GT\\SqlBuilder\\": "./src",
 			"Gt\\SqlBuilder\\": "./src"
 		}
 	},
 
 	"autoload-dev": {
 		"psr-4": {
-			"Gt\\SqlBuilder\\Test\\": "./test/phpunit"
+			"GT\\SqlBuilder\\Test\\": "./test/phpunit"
 		}
 	},
 	"config": {

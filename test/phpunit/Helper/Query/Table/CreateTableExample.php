@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query\Table;
+namespace GT\SqlBuilder\Test\Helper\Query\Table;
 
-use Gt\SqlBuilder\Query\Table\CreateTableQuery;
+use GT\SqlBuilder\Query\Table\CreateTableQuery;
 
 class CreateTableExample extends CreateTableQuery {
 	public function createTable():string {

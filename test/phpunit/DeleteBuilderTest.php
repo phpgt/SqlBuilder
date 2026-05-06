@@ -1,9 +1,9 @@
 <?php /** @noinspection SqlNoDataSourceInspection */
 /** @noinspection SqlResolve */
-namespace Gt\SqlBuilder\Test;
+namespace GT\SqlBuilder\Test;
 
-use Gt\SqlBuilder\DeleteBuilder;
-use Gt\SqlBuilder\Query\DeleteQuery;
+use GT\SqlBuilder\DeleteBuilder;
+use GT\SqlBuilder\Query\DeleteQuery;
 
 class DeleteBuilderTest extends QueryTestCase {
 	public function testFrom():void {

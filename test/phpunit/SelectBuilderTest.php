@@ -1,10 +1,10 @@
 <?php /** @noinspection SqlResolve */
 /** @noinspection SqlNoDataSourceInspection */
-namespace Gt\SqlBuilder\Test;
+namespace GT\SqlBuilder\Test;
 
 use Error;
-use Gt\SqlBuilder\Query\SelectQuery;
-use Gt\SqlBuilder\SelectBuilder;
+use GT\SqlBuilder\Query\SelectQuery;
+use GT\SqlBuilder\SelectBuilder;
 
 class SelectBuilderTest extends QueryTestCase {
 	public function testSelect():void {
@@ -181,7 +181,7 @@ class SelectBuilderTest extends QueryTestCase {
 	public function test_invalidQueryParts():void {
 		$sut = new SelectBuilder();
 		self::expectException(Error::class);
-		self::expectExceptionMessage("Call to undefined method Gt\SqlBuilder\SelectBuilder::unknown()");
+		self::expectExceptionMessage("Call to undefined method GT\SqlBuilder\SelectBuilder::unknown()");
 		$sut->unknown("test");
 	}
 
