@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder\Query;
+namespace GT\SqlBuilder\Query;
 
 abstract class InsertQuery extends SqlQuery {
 	public function __toString():string {

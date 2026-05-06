@@ -1,13 +1,13 @@
 <?php /** @noinspection SqlNoDataSourceInspection */
 /** @noinspection SqlResolve */
-namespace Gt\SqlBuilder\Test\Query;
+namespace GT\SqlBuilder\Test\Query;
 
-use Gt\SqlBuilder\Test\Helper\Query\InsertExample;
-use Gt\SqlBuilder\Test\Helper\Query\InsertInferredPlaceholderExample;
-use Gt\SqlBuilder\Test\Helper\Query\InsertMixedPlaceholderExample;
-use Gt\SqlBuilder\Test\Helper\Query\InsertSelectInlineExample;
-use Gt\SqlBuilder\Test\Helper\Query\InsertValuesExample;
-use Gt\SqlBuilder\Test\QueryTestCase;
+use GT\SqlBuilder\Test\Helper\Query\InsertExample;
+use GT\SqlBuilder\Test\Helper\Query\InsertInferredPlaceholderExample;
+use GT\SqlBuilder\Test\Helper\Query\InsertMixedPlaceholderExample;
+use GT\SqlBuilder\Test\Helper\Query\InsertSelectInlineExample;
+use GT\SqlBuilder\Test\Helper\Query\InsertValuesExample;
+use GT\SqlBuilder\Test\QueryTestCase;
 
 class InsertQueryTest extends QueryTestCase {
 	public function testInsertSimple() {

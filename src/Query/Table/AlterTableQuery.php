@@ -1,8 +1,8 @@
 <?php
-namespace Gt\SqlBuilder\Query\Table;
+namespace GT\SqlBuilder\Query\Table;
 
-use Gt\SqlBuilder\Query\SqlQuery;
-use Gt\SqlBuilder\SqlBuilderException;
+use GT\SqlBuilder\Query\SqlQuery;
+use GT\SqlBuilder\SqlBuilderException;
 
 abstract class AlterTableQuery extends SqlQuery {
 	public function __toString():string {

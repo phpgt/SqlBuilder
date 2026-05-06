@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder\Condition;
+namespace GT\SqlBuilder\Condition;
 
 class MatchAll implements ConditionMatcher {
 	public function getLogic():string {

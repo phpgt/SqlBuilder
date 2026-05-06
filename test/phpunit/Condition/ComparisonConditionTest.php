@@ -1,11 +1,11 @@
 <?php
-namespace Gt\SqlBuilder\Test\Condition;
+namespace GT\SqlBuilder\Test\Condition;
 
 use DateTime;
-use Gt\SqlBuilder\Condition\Between;
-use Gt\SqlBuilder\Condition\Equals;
-use Gt\SqlBuilder\Condition\GreaterThan;
-use Gt\SqlBuilder\Condition\LessThan;
+use GT\SqlBuilder\Condition\Between;
+use GT\SqlBuilder\Condition\Equals;
+use GT\SqlBuilder\Condition\GreaterThan;
+use GT\SqlBuilder\Condition\LessThan;
 use PHPUnit\Framework\TestCase;
 
 class ComparisonConditionTest extends TestCase {

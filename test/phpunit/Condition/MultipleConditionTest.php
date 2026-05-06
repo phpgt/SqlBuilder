@@ -1,13 +1,13 @@
 <?php
-namespace Gt\SqlBuilder\Test\Condition;
+namespace GT\SqlBuilder\Test\Condition;
 
-use Gt\SqlBuilder\Condition\Condition;
-use Gt\SqlBuilder\Condition\Equals;
-use Gt\SqlBuilder\Condition\GreaterThan;
-use Gt\SqlBuilder\Condition\LessThan;
-use Gt\SqlBuilder\Condition\MatchAll;
-use Gt\SqlBuilder\Condition\MatchAny;
-use Gt\SqlBuilder\Condition\MultipleCondition;
+use GT\SqlBuilder\Condition\Condition;
+use GT\SqlBuilder\Condition\Equals;
+use GT\SqlBuilder\Condition\GreaterThan;
+use GT\SqlBuilder\Condition\LessThan;
+use GT\SqlBuilder\Condition\MatchAll;
+use GT\SqlBuilder\Condition\MatchAny;
+use GT\SqlBuilder\Condition\MultipleCondition;
 use PHPUnit\Framework\TestCase;
 
 class MultipleConditionTest extends TestCase {

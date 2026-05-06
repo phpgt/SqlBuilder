@@ -1,12 +1,12 @@
 <?php
-namespace Gt\SqlBuilder\Test\Query;
+namespace GT\SqlBuilder\Test\Query;
 
-use Gt\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
-use Gt\SqlBuilder\Query\SqlQuery;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhereIndexedNamedMixedParameters;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhereIndexedParameters;
-use Gt\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhereNamedParameters;
-use Gt\SqlBuilder\Test\QueryTestCase;
+use GT\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
+use GT\SqlBuilder\Query\SqlQuery;
+use GT\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhereIndexedNamedMixedParameters;
+use GT\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhereIndexedParameters;
+use GT\SqlBuilder\Test\Helper\Query\SelectExampleExtendWhereNamedParameters;
+use GT\SqlBuilder\Test\QueryTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class SqlQueryTest extends QueryTestCase {

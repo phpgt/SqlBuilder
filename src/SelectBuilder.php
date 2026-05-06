@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder;
+namespace GT\SqlBuilder;
 
-use Gt\SqlBuilder\Query\SelectQuery;
+use GT\SqlBuilder\Query\SelectQuery;
 
 /**
  * @extends AbstractQueryBuilder<SelectQuery>

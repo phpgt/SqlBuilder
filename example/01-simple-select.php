@@ -1,6 +1,6 @@
 <?php
 require(__DIR__ . "/../vendor/autoload.php");
-use Gt\SqlBuilder\Query\SelectQuery;
+use GT\SqlBuilder\Query\SelectQuery;
 
 class BaseSelect extends SelectQuery {
 	public function select():array {

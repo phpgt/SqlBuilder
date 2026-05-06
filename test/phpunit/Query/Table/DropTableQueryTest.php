@@ -1,8 +1,8 @@
 <?php
-namespace Gt\SqlBuilder\Test\Query\Table;
+namespace GT\SqlBuilder\Test\Query\Table;
 
-use Gt\SqlBuilder\Test\Helper\Query\Table\DropTableExample;
-use Gt\SqlBuilder\Test\QueryTestCase;
+use GT\SqlBuilder\Test\Helper\Query\Table\DropTableExample;
+use GT\SqlBuilder\Test\QueryTestCase;
 
 class DropTableQueryTest extends QueryTestCase {
 	public function testDropTableSimple():void {

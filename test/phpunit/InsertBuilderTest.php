@@ -1,10 +1,10 @@
 <?php /** @noinspection SqlResolve */
 /** @noinspection SqlNoDataSourceInspection */
-namespace Gt\SqlBuilder\Test;
+namespace GT\SqlBuilder\Test;
 
-use Gt\SqlBuilder\InsertBuilder;
-use Gt\SqlBuilder\Query\InsertQuery;
-use Gt\SqlBuilder\SqlBuilderException;
+use GT\SqlBuilder\InsertBuilder;
+use GT\SqlBuilder\Query\InsertQuery;
+use GT\SqlBuilder\SqlBuilderException;
 
 class InsertBuilderTest extends QueryTestCase {
 	public function testSet_shortNamed():void {

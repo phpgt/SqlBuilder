@@ -1,8 +1,8 @@
 <?php
-namespace Gt\SqlBuilder;
+namespace GT\SqlBuilder;
 
 use Error;
-use Gt\SqlBuilder\Query\SqlQuery;
+use GT\SqlBuilder\Query\SqlQuery;
 use Stringable;
 
 /**

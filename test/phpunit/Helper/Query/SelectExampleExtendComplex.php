@@ -1,9 +1,9 @@
 <?php
-namespace Gt\SqlBuilder\Test\Helper\Query;
+namespace GT\SqlBuilder\Test\Helper\Query;
 
-use Gt\SqlBuilder\Condition\AndCondition;
-use Gt\SqlBuilder\Condition\Condition;
-use Gt\SqlBuilder\Condition\OrCondition;
+use GT\SqlBuilder\Condition\AndCondition;
+use GT\SqlBuilder\Condition\Condition;
+use GT\SqlBuilder\Condition\OrCondition;
 
 class SelectExampleExtendComplex extends SelectExampleExtendWhere {
 	public function select():array {

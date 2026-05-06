@@ -1,8 +1,8 @@
 <?php
-namespace Gt\SqlBuilder\Test\Query;
+namespace GT\SqlBuilder\Test\Query;
 
-use Gt\SqlBuilder\Test\Helper\Query\DeleteExample;
-use Gt\SqlBuilder\Test\QueryTestCase;
+use GT\SqlBuilder\Test\Helper\Query\DeleteExample;
+use GT\SqlBuilder\Test\QueryTestCase;
 
 class DeleteQueryTest extends QueryTestCase {
 	public function testDelete() {

@@ -1,7 +1,7 @@
 <?php
-namespace Gt\SqlBuilder\Condition;
+namespace GT\SqlBuilder\Condition;
 
-use Gt\SqlBuilder\SqlBuilderException;
+use GT\SqlBuilder\SqlBuilderException;
 
 class MixedIndexedAndNamedParametersException extends SqlBuilderException {
 

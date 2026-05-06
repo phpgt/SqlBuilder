@@ -1,5 +1,5 @@
 <?php
-namespace Gt\SqlBuilder\Test;
+namespace GT\SqlBuilder\Test;
 
 use PHPUnit\Framework\TestCase;
 
