@@ -77,8 +77,8 @@ class StudentSelectByAge extends StudentSelect {
 }
 ```
 
-Example usage: A fluent class that _builds_ a SELECT query (coming in v2 release)
----------------------------------------------------------------------------------
+Example usage: A fluent class that _builds_ a SELECT query
+----------------------------------------------------------
 
 As you can see in the example above, `SqlQuery` functions always return an array of expressions. The `SqlBuilder` classes have the same methods (`select`, `from`, `where`, etc.) but take the expressions as parameters, acting as a **[fluent interface][fluent]**. 
 
@@ -87,11 +87,12 @@ To create the same query as in the example above with fluent syntax:
 ```php
 use GT\SqlBuilder\SelectBuilder;
 
-$selectQuery = new SelectBuilder(
+$selectQuery = new SelectBuilder();
+$selectQuery->select(
 	"id",
 	"forename",
 	"surname",
-	"dateOfBirth"
+	"dateOfBirth",
 )->from(
 	"student"
 )->where(
@@ -99,19 +100,19 @@ $selectQuery = new SelectBuilder(
 );
 ```
 
-This is particularly useful for when there is a base query, say `StudentSelect`, and your code only requires a single additional condition. Rather than having to create a separate class for this single usage, it can be called inline:
+This is useful when a query is local to one small piece of code and does not justify its own named query class.
 
 ```php
 use GT\SqlBuilder\SelectBuilder;
 
-// Start by using a base StudentSelect, then add a single inline condition to it.
-$studentSelect = new StudentSelect();
-
-$selectQuery = new SelectBuilder($studentSelect)
-->where(
-	"year(now()) - year(dateOfBirth) = :age"
-);
+$selectQuery = new SelectBuilder();
+$selectQuery->select("email")
+	->from("student")
+	->where("deletedAt is null")
+	->orderBy("email");
 ```
+
+For reusable queries and inheritance, prefer the query-class approach shown in the first example.
 
 
 Conditionals
