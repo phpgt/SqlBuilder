@@ -7,7 +7,7 @@ use GT\SqlBuilder\Condition\MixedIndexedAndNamedParametersException;
 use GT\SqlBuilder\SqlBuilderException;
 use Stringable;
 
-/** @SuppressWarnings(PHPMD.ExcessiveClassComplexity) */
+/** @SuppressWarnings("PHPMD.ExcessiveClassComplexity") */
 abstract class SqlQuery implements Stringable {
 	const PRE_QUERY_COMMENT = "/* preQuery */";
 	const POST_QUERY_COMMENT = "/* postQuery */";
@@ -33,7 +33,7 @@ abstract class SqlQuery implements Stringable {
 
 	/**
 	 * @param array<string, string>|array<string, string[]|mixed> $clauses
-	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 * @SuppressWarnings("PHPMD.CyclomaticComplexity")
 	 * @phpcs:disable Generic.Metrics.CyclomaticComplexity
 	 */
 	protected function processClauseList(array $clauses):string {
@@ -140,7 +140,7 @@ abstract class SqlQuery implements Stringable {
 		return $query;
 	}
 
-	/** @param string[] $parts */
+	/** @param array<string|Condition> $parts */
 	protected function processWhereClause(
 		string $name,
 		array $parts
@@ -159,7 +159,6 @@ abstract class SqlQuery implements Stringable {
 				$part = new AndCondition($part);
 			}
 
-			/** @var Condition $part */
 			if($partShortParameterSyntax = $part->getShortParameterSyntax()) {
 				if($shortParameterSyntax) {
 					if($shortParameterSyntax !== $partShortParameterSyntax) {

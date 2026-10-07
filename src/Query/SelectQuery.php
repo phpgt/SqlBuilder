@@ -1,7 +1,7 @@
 <?php
 namespace GT\SqlBuilder\Query;
 
-/** @SuppressWarnings(PHPMD.TooManyPublicMethods) */
+/** @SuppressWarnings("PHPMD.TooManyPublicMethods") */
 abstract class SelectQuery extends SqlQuery {
 	public function __construct(
 		protected bool $subQuery = false

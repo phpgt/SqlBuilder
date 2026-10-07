@@ -9,7 +9,7 @@ use GT\SqlBuilder\Query\InsertQuery;
  * @method self into(string...$tables)
  * @method self columns(string...$columns)
  * @method self values(mixed...$values)
- * @method self set(array|string...$assignments)
+ * @method self set(array<string, mixed>|string ...$assignments)
  */
 class InsertBuilder extends AbstractQueryBuilder {
 	const QUERY_PARTS = [
